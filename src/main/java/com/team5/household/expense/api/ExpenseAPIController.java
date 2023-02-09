@@ -24,15 +24,15 @@ public class ExpenseAPIController {
         return resultMap;
     }
 
-    @PostMapping("/add")
-    public Map<String, Object> addExpense(@RequestParam String ehTitle, @RequestParam LocalDate ehDate,
-        @RequestParam Long ehMiSeq, @RequestParam Long ehPiSeq, @RequestParam Long ehPrice, @RequestParam String ehStoreName,
-        @RequestPart MultipartFile ehImgFile, @RequestParam String ehLocation, @RequestParam Long ehBalance,
-        @RequestParam Long ehCcSeq, @RequestParam Long ehCdcSeq)
-    {
-
-
-    }
+//    @PostMapping("/add")
+//    public Map<String, Object> addExpense(@RequestParam String ehTitle, @RequestParam LocalDate ehDate,
+//        @RequestParam Long ehMiSeq, @RequestParam Long ehPiSeq, @RequestParam Long ehPrice, @RequestParam String ehStoreName,
+//        @RequestPart MultipartFile ehImgFile, @RequestParam String ehLocation, @RequestParam Long ehBalance,
+//        @RequestParam Long ehCcSeq, @RequestParam Long ehCdcSeq)
+//    {
+//
+//
+//    }
 
     }
 
