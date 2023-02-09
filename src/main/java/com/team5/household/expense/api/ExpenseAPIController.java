@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +43,7 @@ public class ExpenseAPIController {
     }
 
     @Operation(summary = "지출내역 생성", description = "지출내역을 생성합니다.")
-    @PostMapping("/add")
+    @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Object> addExpense(@RequestParam String ehTitle, @RequestParam LocalDate ehDate,
     @RequestParam Long ehMiSeq, @RequestParam Long ehPiSeq, @RequestParam Long ehPrice, @RequestParam String ehStoreName,
     @RequestPart MultipartFile ehImgFile, @RequestParam String ehLocation, @RequestParam Long ehBalance,

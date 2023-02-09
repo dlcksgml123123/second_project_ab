@@ -1,6 +1,7 @@
 package com.team5.household.expense.api;
 
 import com.team5.household.expense.repository.ExpenseRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
+@Tag(name = "파일 API", description = "파일업로드")
 public class FileAPIController {
     @Value("${file.image.expense}") String event_img_path;
 

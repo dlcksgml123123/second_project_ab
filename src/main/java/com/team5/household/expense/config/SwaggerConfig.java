@@ -10,7 +10,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI floOpenAPI() {
         Info info =
-        new Info().version("1.0.0").title("Expense Service API").description("Expense Service Restful API");
+        new Info().version("1.0.0").title("지출내역 서비스 API").description("Expense Service Restful API");
         return new OpenAPI().info(info);
     }
 }
