@@ -10,6 +10,8 @@ import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -33,8 +35,9 @@ public class ExpenseEntity {
     @Schema(description = "회원 번호", example = "1")
     @Column(name = "eh_mi_seq") private Long ehMiSeq;
 
-    @Schema(description = "지출 내역 날짜", example = "2022-02-09 00:00:00")
-    @Column(name = "eh_date") private @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDate ehDate;
+    @Schema(description = "지출 내역 날짜", example = "2022-02-09T00:00:00")
+    @Column(name = "eh_date")
+    private LocalDateTime ehDate;
 
     @Schema(description = "결제수단", example = "1")
     @Column(name = "eh_pi_seq") private Long ehPiSeq;

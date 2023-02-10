@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.team5.household.HouseholdApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-02-09T09:26:32" hostname="puthfamilyui-MacBookPro.local" time="0.194">
+<testsuite name="com.team5.household.HouseholdApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-02-10T08:46:25" hostname="puthfamilyui-MacBookPro.local" time="0.254">
   <properties/>
-  <testcase name="contextLoads()" classname="com.team5.household.HouseholdApplicationTests" time="0.194"/>
-  <system-out><![CDATA[18:26:21.594 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [HouseholdApplicationTests]: using SpringBootContextLoader
-18:26:21.603 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.team5.household.HouseholdApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
-18:26:21.603 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.team5.household.HouseholdApplicationTests]: HouseholdApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-18:26:21.635 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using ContextCustomizers for test class [HouseholdApplicationTests]: [DisableObservabilityContextCustomizer, PropertyMappingContextCustomizer, Customizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer, TestRestTemplateContextCustomizer]
-18:26:21.826 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/puthfamily/Desktop/household-project/build/classes/java/main/com/team5/household/HouseholdApplication.class]
-18:26:21.845 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.team5.household.HouseholdApplication for test class com.team5.household.HouseholdApplicationTests
-18:26:22.041 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners for test class [HouseholdApplicationTests]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
-18:26:22.044 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: class [HouseholdApplicationTests], class annotated with @DirtiesContext [false] with mode [null]
+  <testcase name="contextLoads()" classname="com.team5.household.HouseholdApplicationTests" time="0.254"/>
+  <system-out><![CDATA[17:46:18.145 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [HouseholdApplicationTests]: using SpringBootContextLoader
+17:46:18.154 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.team5.household.HouseholdApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+17:46:18.155 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.team5.household.HouseholdApplicationTests]: HouseholdApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:46:18.186 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using ContextCustomizers for test class [HouseholdApplicationTests]: [DisableObservabilityContextCustomizer, PropertyMappingContextCustomizer, Customizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer, TestRestTemplateContextCustomizer]
+17:46:18.274 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/puthfamily/Desktop/household-project/build/classes/java/main/com/team5/household/HouseholdApplication.class]
+17:46:18.277 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.team5.household.HouseholdApplication for test class com.team5.household.HouseholdApplicationTests
+17:46:18.374 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners for test class [HouseholdApplicationTests]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
+17:46:18.375 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: class [HouseholdApplicationTests], class annotated with @DirtiesContext [false] with mode [null]
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -19,21 +19,21 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.0.2)
 
-2023-02-09T18:26:24.042+09:00  INFO 33485 --- [    Test worker] c.t.household.HouseholdApplicationTests  : Starting HouseholdApplicationTests using Java 19.0.2 with PID 33485 (started by ? in /Users/puthfamily/Desktop/household-project)
-2023-02-09T18:26:24.046+09:00  INFO 33485 --- [    Test worker] c.t.household.HouseholdApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2023-02-09T18:26:26.987+09:00  INFO 33485 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-02-09T18:26:27.133+09:00  INFO 33485 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 139 ms. Found 1 JPA repository interfaces.
-2023-02-09T18:26:27.850+09:00  INFO 33485 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-02-09T18:26:28.458+09:00  INFO 33485 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1537c744
-2023-02-09T18:26:28.461+09:00  INFO 33485 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-02-09T18:26:28.539+09:00  INFO 33485 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-02-09T18:26:28.574+09:00  INFO 33485 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
-2023-02-09T18:26:28.701+09:00  WARN 33485 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2023-02-09T18:26:28.892+09:00  INFO 33485 --- [    Test worker] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-02-09T18:26:29.481+09:00  INFO 33485 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-02-09T18:26:29.487+09:00  INFO 33485 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-02-09T18:26:30.330+09:00  WARN 33485 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-02-09T18:26:32.344+09:00  INFO 33485 --- [    Test worker] c.t.household.HouseholdApplicationTests  : Started HouseholdApplicationTests in 10.18 seconds (process running for 12.421)
+2023-02-10T17:46:18.913+09:00  INFO 43491 --- [    Test worker] c.t.household.HouseholdApplicationTests  : Starting HouseholdApplicationTests using Java 19.0.2 with PID 43491 (started by puthfamily in /Users/puthfamily/Desktop/household-project)
+2023-02-10T17:46:18.917+09:00  INFO 43491 --- [    Test worker] c.t.household.HouseholdApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2023-02-10T17:46:20.304+09:00  INFO 43491 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-10T17:46:20.488+09:00  INFO 43491 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 174 ms. Found 1 JPA repository interfaces.
+2023-02-10T17:46:21.213+09:00  INFO 43491 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-10T17:46:21.799+09:00  INFO 43491 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3e6748ae
+2023-02-10T17:46:21.804+09:00  INFO 43491 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-10T17:46:21.917+09:00  INFO 43491 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-10T17:46:21.952+09:00  INFO 43491 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-02-10T17:46:22.075+09:00  WARN 43491 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-02-10T17:46:22.241+09:00  INFO 43491 --- [    Test worker] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-02-10T17:46:22.849+09:00  INFO 43491 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-10T17:46:22.856+09:00  INFO 43491 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-10T17:46:23.991+09:00  WARN 43491 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-10T17:46:25.909+09:00  INFO 43491 --- [    Test worker] c.t.household.HouseholdApplicationTests  : Started HouseholdApplicationTests in 7.488 seconds (process running for 9.154)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

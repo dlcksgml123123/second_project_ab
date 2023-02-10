@@ -16,7 +16,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Service
 public class ExpenseService {
@@ -30,7 +34,7 @@ public class ExpenseService {
 
     public void addEvent(
         String ehTitle,
-        LocalDate ehDate,
+        LocalDateTime ehDate,
         Long ehMiSeq,
         Long ehPiSeq,
         Long ehPrice,
@@ -76,6 +80,16 @@ public class ExpenseService {
                 .ehImgFile(saveEventFileName).build();
 
         expense = eRepo.save(expense);
+    }
+
+    public Map<String, Object> getExpenseList(Long ehMiSeq, Pageable pageable) {
+        Page<ExpenseEntity> page = eRepo.findPageByehMiSeq(ehMiSeq, pageable);
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        map.put("list", page.getContent());
+        map.put("total", page.getTotalElements());
+        map.put("totalPage", page.getTotalPages());
+        map.put("currentPage", page.getNumber());
+        return map;
     }
 
 }

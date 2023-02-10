@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -14,7 +16,7 @@ public class ExpenseListResponseVO {
     private String eh_title;
     private String eh_content;
     private Long eh_mi_seq;
-    private LocalDate eh_date;
+    private LocalDateTime eh_date;
     private Long eh_pi_seq;
     private Long eh_price;
     private String eh_store_name;

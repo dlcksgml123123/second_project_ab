@@ -1,6 +1,7 @@
 package com.team5.household.expense.api;
 
 import com.team5.household.expense.repository.ExpenseRepository;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URLEncoder;
@@ -24,19 +26,19 @@ import java.util.Map;
 @RestController
 @Tag(name = "파일 API", description = "파일업로드")
 public class FileAPIController {
-    @Value("${file.image.expense}") String event_img_path;
-
+    @Value("${file.image.expense}") String expense_img_path;
     @Autowired ExpenseRepository eRepo;
+    @GetMapping("/api/image/{type}/{file}")
 
     public ResponseEntity<Object> getImagedownload(
-            @PathVariable String file, HttpServletRequest request,
-            @PathVariable String type
+            @Parameter(description = "타입", example = "expense") @PathVariable String type,
+            @Parameter(description = "파일", example = "cat") @PathVariable String file, HttpServletRequest request
     ) throws Exception
     {
         Map<String, Object> map = new LinkedHashMap<>();
         Path folderLocation = null;
-        if (type.equals("event")) {
-            folderLocation = Paths.get(event_img_path);
+        if (type.equals("expense")) {
+            folderLocation = Paths.get(expense_img_path);
         }
 
         else {
