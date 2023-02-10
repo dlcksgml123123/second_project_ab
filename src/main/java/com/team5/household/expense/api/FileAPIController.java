@@ -1,6 +1,7 @@
 package com.team5.household.expense.api;
 
 import com.team5.household.expense.repository.ExpenseRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,10 +25,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
-@Tag(name = "파일 API", description = "파일업로드")
+@Tag(name = "파일 API", description = "이미지 출력 및 업로드")
 public class FileAPIController {
     @Value("${file.image.expense}") String expense_img_path;
     @Autowired ExpenseRepository eRepo;
+    @Operation(summary = "이미지 파일 출력", description = "특정 이미지를 검색합니다.")
     @GetMapping("/api/image/{type}/{file}")
 
     public ResponseEntity<Object> getImagedownload(
