@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @Builder
 public class LoginVO {
-    private Long memberSeq;
-    private String memberEmail;
-    private String memberPwd;
+    private String email;
+    private String pwd;
 }

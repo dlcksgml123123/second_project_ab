@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class MemberResponseVO {
-    private String MemberEmail;
-    private String Membernickname;
+    private String email;
+    private String nickname;
 
     // public MemberResponseVO(MemberInfoEntity entity){
     //     this.MemberEmail = entity.getMiEmail();
