@@ -8,6 +8,6 @@ import lombok.Data;
 
 @Data
 public class LoginVO {
-    private String memberEmail;
-    private String memberPwd;
+    private String email;
+    private String pwd;
 }
