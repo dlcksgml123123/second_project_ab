@@ -1,20 +1,14 @@
 package com.team5.household.service;
 
-<<<<<<< HEAD
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
-=======
->>>>>>> 39fbe14b43a189bd30e2dd028c4e9137b48ab814
 import org.springframework.stereotype.Service;
 
 import com.team5.household.entity.MemberInfoEntity;
 import com.team5.household.repository.MemberInfoRepository;
-<<<<<<< HEAD
 import com.team5.household.vo.LoginVO;
-=======
->>>>>>> 39fbe14b43a189bd30e2dd028c4e9137b48ab814
 import com.team5.household.vo.MemberJoinVO;
 import com.team5.household.vo.MemberResponseVO;
 
@@ -34,7 +28,6 @@ public class MemberService {
         response.setEmail(data.getEmail());
         response.setNickname(data.getNickname());
         return response;
-<<<<<<< HEAD
     }
     
     public Map<String, Object> loginMember(LoginVO data) {
@@ -55,7 +48,5 @@ public class MemberService {
             resultMap.put("code", HttpStatus.ACCEPTED);
         }
         return resultMap;
-=======
->>>>>>> 39fbe14b43a189bd30e2dd028c4e9137b48ab814
     }
 }
