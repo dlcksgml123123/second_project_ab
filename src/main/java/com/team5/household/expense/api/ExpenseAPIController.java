@@ -42,7 +42,7 @@ public class ExpenseAPIController {
          return resultMap;
     }
 
-    @Operation(summary = "회원번호 검색", description = "특정 회원의 최대 19개의 지출내역을 출력합니다.")
+    @Operation(summary = "회원번호 검색", description = "특정 회원의 최대 20개의 지출내역을 출력합니다.")
     @GetMapping("/page")
     @PageableAsQueryParam
     public ResponseEntity<Object> getListPage
