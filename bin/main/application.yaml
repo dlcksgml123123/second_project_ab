@@ -17,6 +17,10 @@ spring:
       max-file-size: 100MB
       max-request-size: 110MB
 
+#Jwt Token
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+
 # Swagger Settings
 springdoc:
   default-consumes-media-type: application/json

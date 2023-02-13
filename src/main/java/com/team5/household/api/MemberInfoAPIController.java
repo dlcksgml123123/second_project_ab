@@ -31,5 +31,4 @@ public class MemberInfoAPIController {
         return resultmap;
     }
     
-    
 }
