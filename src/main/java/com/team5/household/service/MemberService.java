@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.team5.household.entity.MemberInfoEntity;
 import com.team5.household.repository.MemberInfoRepository;
 import com.team5.household.utils.AESAlgorithm;
+import com.team5.household.vo.LoginVO;
 import com.team5.household.vo.MemberJoinVO;
 import com.team5.household.vo.MemberResponseVO;
 
@@ -52,6 +53,26 @@ public class MemberService {
             resultMap.put("status", true);
             resultMap.put("message", "회원 가입이 완료되었습니다.");
             resultMap.put("code", HttpStatus.CREATED);
+        }
+        return resultMap;
+    }
+    
+    public Map<String, Object> loginMember(LoginVO data) {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+        MemberInfoEntity user = null;
+        try {
+            user = mRepo.findByMiEmailAndMiPwd(data.getMemberEmail(), data.getMemberPwd());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (user == null) {
+            resultMap.put("status", false);
+            resultMap.put("message", "이메일 또는 비밀번호 오류입니다.");
+            resultMap.put("code", HttpStatus.BAD_REQUEST);
+        } else {
+            resultMap.put("status", true);
+            resultMap.put("message", "로그인 되었습니다.");
+            resultMap.put("code", HttpStatus.ACCEPTED);
         }
         return resultMap;
     }

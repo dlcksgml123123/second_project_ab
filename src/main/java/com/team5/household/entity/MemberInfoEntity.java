@@ -25,7 +25,6 @@ public class MemberInfoEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="mi_seq") private Long miSeq;
     @Column(name="mi_email") private String miEmail;
-    @JsonIgnore
     @Column(name="mi_pwd") private String miPwd;
     @Column(name="mi_nickname") private String miNickname;
     // @Column(name="mi_name") private String miName;
