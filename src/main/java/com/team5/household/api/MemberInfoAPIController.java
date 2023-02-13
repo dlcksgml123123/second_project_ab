@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team5.household.service.MemberService;
-import com.team5.household.vo.LoginVO;
 import com.team5.household.vo.MemberJoinVO;
 import com.team5.household.vo.MemberResponseVO;
 
@@ -32,11 +31,14 @@ public class MemberInfoAPIController {
         return resultmap;
     }
     
+<<<<<<< HEAD
     @PostMapping("login")
     public Map<String, Object> postMemberLogin(@RequestBody LoginVO login) {
         Map<String, Object> resultMap = mService.loginMember(login);
         System.out.println(login);
         return resultMap;
     }
+=======
+>>>>>>> 39fbe14b43a189bd30e2dd028c4e9137b48ab814
     
 }
