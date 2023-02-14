@@ -6,5 +6,4 @@ import lombok.Data;
 public class CultureCategoryVO {
     private String cc_name;
     private String cdc_name;
-    private Long cdc_cc_seq;
 }
