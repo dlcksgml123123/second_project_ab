@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-HouseholdApplication<household>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.team5.household.HouseholdApplication",
+            "projectName": "household",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
