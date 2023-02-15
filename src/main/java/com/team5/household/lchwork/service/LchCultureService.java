@@ -5,14 +5,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestPart;
 
+import com.team5.household.lchwork.VO.CategoryInputResponseVO;
+import com.team5.household.lchwork.VO.CategoryListResponseVO;
 import com.team5.household.lchwork.VO.CategoryListVO;
-import com.team5.household.lchwork.VO.CultureCategoryVO;
-import com.team5.household.lchwork.VO.CultureDetailCategoryVO;
+import com.team5.household.lchwork.VO.CategoryUpdateResponseVO;
+import com.team5.household.lchwork.VO.DetailCategoryInputResponseVO;
+import com.team5.household.lchwork.VO.DetailCategoryListResponseVO;
+import com.team5.household.lchwork.VO.DetailCategoryUpdateResponseVO;
 import com.team5.household.lchwork.entity.LchCultureCategoryEntity;
 import com.team5.household.lchwork.entity.LchCultureDetailCategoryEntity;
 import com.team5.household.lchwork.repository.LchCultureCategoryRepository;
@@ -26,62 +31,76 @@ public class LchCultureService {
     @Autowired LchCultureDetailCategoryRepository cdcRepo;
 
     // 문화 대분류 카테고리 추가
-    public Map<String,Object> addCategory(LchCultureCategoryEntity data) {
-        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+    // public Map<String,Object> addCategory(LchCultureCategoryEntity data) {
+    public CategoryInputResponseVO addCategory(LchCultureCategoryEntity data) {
+        // Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+        CategoryInputResponseVO response = new CategoryInputResponseVO();
         List<LchCultureCategoryEntity> ccList = ccRepo.findAll();
         LchCultureCategoryEntity ccEntity = ccRepo.findByCcName(data.getCcName());
         if(ccList.size() >= 20) {
-            resultMap.put("status", false);
-            resultMap.put("message", "대분류 카테고리를 더이상 추가할 수 없습니다.");
+            // resultMap.put("status", false);
+            // resultMap.put("message", "대분류 카테고리를 더이상 추가할 수 없습니다.");
+            response.setStatus(false);
+            response.setMessage("대분류 카테고리를 더이상 추가할 수 없습니다.");
         }
         else {
             if(ccRepo.countByCcName(data.getCcName()) != 0) {
 
-                resultMap.put("status", false);
-                resultMap.put("message", data.getCcName()+"은/는 이미 등록된 대분류 카테고리 입니다.");
+                // resultMap.put("status", false);
+                // resultMap.put("message", data.getCcName()+"은/는 이미 등록된 대분류 카테고리 입니다.");
+                response.setStatus(false);
+                response.setMessage(data.getCcName()+"은/는 이미 등록된 대분류 카테고리 입니다.");
             }
             else {
                 ccEntity = new LchCultureCategoryEntity(null, data.getCcName());
                 ccRepo.save(ccEntity);
-                resultMap.put("ccEntity", ccEntity);
-                resultMap.put("status", true);
-                resultMap.put("message", "대분류 카테고리 등록완료.");
+                // resultMap.put("ccEntity", ccEntity);
+                // resultMap.put("status", true);
+                // resultMap.put("message", "대분류 카테고리 등록완료.");
+                response.setCcEntity(ccEntity);
+                response.setStatus(true);
+                response.setMessage("대분류 카테고리 등록완료.");
             }
         }
-        return resultMap;
+        // return resultMap;
+        return response;
     }
 
     // 문화 대분류 카테고리 수정
-    public Map<String, Object> updateCategory(Long no, String name) {
-        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+    public CategoryUpdateResponseVO updateCategory(Long no, String name) {
+        CategoryUpdateResponseVO response = new CategoryUpdateResponseVO();
         Optional<LchCultureCategoryEntity> entityOpt = ccRepo.findById(no);
         if(entityOpt.isEmpty()) {
-            resultMap.put("updated", false);
-            resultMap.put("no", no);
-            resultMap.put("name", name);
-            resultMap.put("message", "잘못된 카테고리 정보입니다.");
+            response.setUpdated(false);
+            response.setMessage("잘못된 카테고리 정보입니다.");
+            // resultMap.put("updated", false);
+            // resultMap.put("message", "잘못된 카테고리 정보입니다.");
         }
         else if(entityOpt.get().getCcName().equalsIgnoreCase(name)) {
-            resultMap.put("updated", false);
-            resultMap.put("no", no);
-            resultMap.put("name", name);
-            resultMap.put("message", "이전과 같은 이름으로 수정할 수 없습니다.");
+            response.setUpdated(false);
+            response.setMessage("이전과 같은 이름으로 수정할 수 없습니다.");
+            // resultMap.put("updated", false);
+            // resultMap.put("message", "이전과 같은 이름으로 수정할 수 없습니다.");
         }
         else if(ccRepo.countByCcName(name) != 0) {
-            resultMap.put("updated", false);
-            resultMap.put("no", no);
-            resultMap.put("name", name);
-            resultMap.put("message", "동일한 카테고리명이 이미 존재합니다.");
+            response.setUpdated(false);
+            response.setMessage(name+"과/와 동일한 카테고리명이 이미 존재합니다.");
+            // resultMap.put("updated", false);
+            // resultMap.put("message", name+"과/와 동일한 카테고리명이 이미 존재합니다.");
         }
         else {
             LchCultureCategoryEntity ccEntity = new LchCultureCategoryEntity(no, name);
             ccRepo.save(ccEntity);
-            resultMap.put("updated", true);
-            resultMap.put("no", no);
-            resultMap.put("name", name);
-            resultMap.put("message", "카테고리 정보 수정이 완료되었습니다.");
+            response.setUpdated(true);
+            response.setMessage("카테고리 정보 수정이 완료되었습니다.");
+            response.setNo(no);
+            response.setName(name);
+            // resultMap.put("updated", true);
+            // resultMap.put("no", no);
+            // resultMap.put("name", name);
+            // resultMap.put("message", "카테고리 정보 수정이 완료되었습니다.");
         }
-        return resultMap;
+        return response;
     }
 
     // 문화 대분류 카테고리 삭제
@@ -92,61 +111,72 @@ public class LchCultureService {
     }
 
     // 문화 소분류 카테고리 추가
-    public Map<String, Object> addDetailCategory(LchCultureDetailCategoryEntity data) {
-        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+    public DetailCategoryInputResponseVO addDetailCategory(LchCultureDetailCategoryEntity data) {
+        DetailCategoryInputResponseVO response = new DetailCategoryInputResponseVO();
         List<LchCultureDetailCategoryEntity> cdcList = cdcRepo.findByCdcCcSeq(data.getCdcCcSeq());
         
         if(cdcList.size() >= 20) {
-            resultMap.put("status", false);
-            resultMap.put("message", "해당 카테고리에 소분류 카테고리를 더이상 추가할 수 없습니다.");
+            response.setStatus(false);
+            response.setMessage("해당 카테고리에 소분류 카테고리를 더이상 추가할 수 없습니다.(20개 제한)");
+            // resultMap.put("status", false);
+            // resultMap.put("message", "해당 카테고리에 소분류 카테고리를 더이상 추가할 수 없습니다.");
         }
         // else if(cdcRepo.countByCdcName(data.getCdcName()) != 0) {
         else if(cdcRepo.findByCdcNameAndCdcCcSeq(data.getCdcName(), data.getCdcCcSeq()) != null) {
-            resultMap.put("status", false);
-            resultMap.put("message", data.getCdcName()+"은/는 이미 등록된 소분류 카테고리 입니다.");
+            response.setStatus(false);
+            response.setMessage(data.getCdcName()+"은/는 이미 등록된 소분류 카테고리 입니다.");
+            // resultMap.put("status", false);
+            // resultMap.put("message", data.getCdcName()+"은/는 이미 등록된 소분류 카테고리 입니다.");
         }
         else {
             LchCultureDetailCategoryEntity cdcEntity = new LchCultureDetailCategoryEntity(
                 null, data.getCdcName(), data.getCdcCcSeq());
             cdcRepo.save(cdcEntity);
-            resultMap.put("cdcEntity", cdcEntity);
-            resultMap.put("status", true);
-            resultMap.put("message", "소분류 카테고리 등록완료.");
+            response.setStatus(true);
+            response.setMessage("소분류 카테고리 등록완료.");
+            response.setCdcEntity(cdcEntity);
+            // resultMap.put("cdcEntity", cdcEntity);
+            // resultMap.put("status", true);
+            // resultMap.put("message", "소분류 카테고리 등록완료.");
         }        
-        return resultMap;
+        return response;
     }
     
     // 문화 소분류 카테고리 수정
-    public Map<String, Object> UpdateDetailCategory(Long no, String name) {
-        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+    public DetailCategoryUpdateResponseVO UpdateDetailCategory(Long no, String name) {
+        DetailCategoryUpdateResponseVO response = new DetailCategoryUpdateResponseVO();
         Optional<LchCultureDetailCategoryEntity> entityOpt = cdcRepo.findById(no);
         if(entityOpt.isEmpty()) {
-            resultMap.put("updated", false);
-            resultMap.put("no", no);
-            resultMap.put("name", name);
-            resultMap.put("message", "잘못된 카테고리 정보입니다.");
+            response.setUpdated(false);
+            response.setMessage("잘못된 카테고리 정보입니다.");
+            // resultMap.put("updated", false);
+            // resultMap.put("message", "잘못된 카테고리 정보입니다.");
         }
         else if(entityOpt.get().getCdcName().equalsIgnoreCase(name)) {
-            resultMap.put("updated", false);
-            resultMap.put("no", no);
-            resultMap.put("name", name);
-            resultMap.put("message", "이전과 같은 이름으로 수정할 수 없습니다.");
+            response.setUpdated(false);
+            response.setMessage("이전과 같은 이름으로 수정할 수 없습니다.");
+            // resultMap.put("updated", false);
+            // resultMap.put("message", "이전과 같은 이름으로 수정할 수 없습니다.");
         }
         else if(cdcRepo.findByCdcNameAndCdcCcSeq(name, entityOpt.get().getCdcCcSeq()) != null) {
-            resultMap.put("updated", false);
-            resultMap.put("no", no);
-            resultMap.put("name", name);
-            resultMap.put("message", "동일한 카테고리명이 이미 존재합니다.");
+            response.setUpdated(false);
+            response.setMessage(name+"과/와 동일한 카테고리명이 이미 존재합니다.");
+            // resultMap.put("updated", false);
+            // resultMap.put("message", name+"과/와 동일한 카테고리명이 이미 존재합니다.");
         }
         else {
             LchCultureDetailCategoryEntity cdcEntity = new LchCultureDetailCategoryEntity(no, name, entityOpt.get().getCdcCcSeq());
             cdcRepo.save(cdcEntity);
-            resultMap.put("updated", true);
-            resultMap.put("no", no);
-            resultMap.put("name", name);
-            resultMap.put("message", "카테고리 정보 수정이 완료되었습니다.");
+            response.setUpdated(true);
+            response.setMessage("카테고리 정보 수정이 완료되었습니다.");
+            response.setNo(no);
+            response.setName(name);
+            // resultMap.put("updated", true);
+            // resultMap.put("no", no);
+            // resultMap.put("name", name);
+            // resultMap.put("message", "카테고리 정보 수정이 완료되었습니다.");
         }
-        return resultMap;
+        return response;
 
     }
     
@@ -158,37 +188,47 @@ public class LchCultureService {
     }
     
     // 대분류 카테고리 리스트 출력
-    public Map<String, Object> getCategoryList() {
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
+    public CategoryListResponseVO getCategoryList() {
+        CategoryListResponseVO response = new CategoryListResponseVO();
         List<LchCultureCategoryEntity> cclist = ccRepo.findAll();
 
         if(cclist != null) {
-            map.put("status", true);
-            map.put("message", "카테고리 리스트 조회 성공");
-            map.put("cclist", cclist);
+            response.setStatus(true);
+            response.setMessage("카테고리 리스트 조회 성공");
+            response.setCclist(cclist);
+            // map.put("status", true);
+            // map.put("message", "카테고리 리스트 조회 성공");
+            // map.put("cclist", cclist);
         }
         else {
-            map.put("status", false);
-            map.put("message", "조회할 카테고리 리스트가 없습니다.");
+            response.setStatus(false);
+            response.setMessage("조회할 카테고리 리스트가 없습니다.");
+            // map.put("status", false);
+            // map.put("message", "조회할 카테고리 리스트가 없습니다.");
         }
 
-        return map;
+        return response;
     }
 
     // 소분류 카테고리 리스트 출력
-    public Map<String, Object> getDetailCategoryList(Long no) {
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
+    public DetailCategoryListResponseVO getDetailCategoryList(Long no) {
+        DetailCategoryListResponseVO response = new DetailCategoryListResponseVO();
         List<LchCultureDetailCategoryEntity> cdclist = cdcRepo.findByCdcCcSeq(no);
         if(cdclist != null) {
-            map.put("status", true);
-            map.put("message", "상세 카테고리 리스트 조회 성공");
-            map.put("cdclist", cdclist);
+            response.setStatus(true);
+            response.setMessage("상세 카테고리 리스트 조회 성공");
+            response.setCdclist(cdclist);
+            // map.put("status", true);
+            // map.put("message", "상세 카테고리 리스트 조회 성공");
+            // map.put("cdclist", cdclist);
         }
         else{
-            map.put("status", false);
-            map.put("message", "조회할 카테고리 리스트가 없습니다.");
+            response.setStatus(false);
+            response.setMessage("조회할 카테고리 리스트가 없습니다.");
+            // map.put("status", false);
+            // map.put("message", "조회할 카테고리 리스트가 없습니다.");
         }
-        return map;
+        return response;
     }
 
 }
