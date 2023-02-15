@@ -1,17 +1,18 @@
 package com.team5.household.api;
 
-import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.team5.household.repository.PaymentInfoRepository;
+
+import com.team5.household.service.PaymenrService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("api/payment")
+@RequiredArgsConstructor
 public class PaymentAPIController {
-    @Autowired PaymentInfoRepository pRepo;
+    private final PaymenrService pService;
     
     
 }

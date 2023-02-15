@@ -1,5 +1,7 @@
 package com.team5.household.entity;
 
+import java.util.Date;
+
 import com.team5.household.vo.MemberJoinVO;
 
 import jakarta.persistence.Column;
@@ -23,6 +25,10 @@ public class MemberInfoEntity {
     @Column(name="mi_email") private String email;
     @Column(name="mi_pwd") private String pwd;
     @Column(name="mi_nickname") private String nickname;
+    @Column(name="mi_name") private String name;
+    @Column(name="mi_birth") private Date birth;
+    @Column(name="mi_gen") private Integer gen;
+    @Column(name="mi_job") private String job;
 
     @Builder
     public MemberInfoEntity(MemberJoinVO data){

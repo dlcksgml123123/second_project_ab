@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.team5.household.entity.PaymentInfoEntity;
 
-@Repository
 public interface PaymentInfoRepository extends JpaRepository<PaymentInfoEntity, Long> {
     
 }
