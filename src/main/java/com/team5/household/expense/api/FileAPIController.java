@@ -1,7 +1,6 @@
 package com.team5.household.expense.api;
 
 import com.team5.household.expense.service.ExpenseService;
-import com.team5.household.expense.service.FileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import java.awt.image.BufferedImage;
 @RequestMapping("/api/images")
 @Tag(name = "파일 API", description = "이미지 출력 및 업로드")
 public class FileAPIController {
-    @Autowired FileService fService;
     @Autowired ExpenseService eService;
     @Operation(summary = "이미지 파일 출력", description = "특정 이미지를 검색합니다.")
     @GetMapping("/{filename}")

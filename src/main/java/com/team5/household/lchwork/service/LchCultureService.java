@@ -1,5 +1,6 @@
 package com.team5.household.lchwork.service;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,13 +12,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestPart;
 
-import com.team5.household.lchwork.VO.CategoryInputResponseVO;
-import com.team5.household.lchwork.VO.CategoryListResponseVO;
 import com.team5.household.lchwork.VO.CategoryListVO;
-import com.team5.household.lchwork.VO.CategoryUpdateResponseVO;
-import com.team5.household.lchwork.VO.DetailCategoryInputResponseVO;
-import com.team5.household.lchwork.VO.DetailCategoryListResponseVO;
-import com.team5.household.lchwork.VO.DetailCategoryUpdateResponseVO;
+import com.team5.household.lchwork.VO.CategoryTotalListVO;
+import com.team5.household.lchwork.VO.responseVO.CategoryInputResponseVO;
+import com.team5.household.lchwork.VO.responseVO.CategoryListResponseVO;
+import com.team5.household.lchwork.VO.responseVO.CategoryUpdateResponseVO;
+import com.team5.household.lchwork.VO.responseVO.DetailCategoryInputResponseVO;
+import com.team5.household.lchwork.VO.responseVO.DetailCategoryListResponseVO;
+import com.team5.household.lchwork.VO.responseVO.DetailCategoryUpdateResponseVO;
 import com.team5.household.lchwork.entity.LchCultureCategoryEntity;
 import com.team5.household.lchwork.entity.LchCultureDetailCategoryEntity;
 import com.team5.household.lchwork.repository.LchCultureCategoryRepository;
@@ -52,7 +54,7 @@ public class LchCultureService {
                 response.setMessage(data.getCcName()+"은/는 이미 등록된 대분류 카테고리 입니다.");
             }
             else {
-                ccEntity = new LchCultureCategoryEntity(null, data.getCcName());
+                ccEntity = new LchCultureCategoryEntity(null, data.getCcName(), null);
                 ccRepo.save(ccEntity);
                 // resultMap.put("ccEntity", ccEntity);
                 // resultMap.put("status", true);
@@ -89,7 +91,7 @@ public class LchCultureService {
             // resultMap.put("message", name+"과/와 동일한 카테고리명이 이미 존재합니다.");
         }
         else {
-            LchCultureCategoryEntity ccEntity = new LchCultureCategoryEntity(no, name);
+            LchCultureCategoryEntity ccEntity = new LchCultureCategoryEntity(no, name, null);
             ccRepo.save(ccEntity);
             response.setUpdated(true);
             response.setMessage("카테고리 정보 수정이 완료되었습니다.");
@@ -209,6 +211,18 @@ public class LchCultureService {
 
         return response;
     }
+    
+    // 카테고리 전체 리스트 출력
+    // public Map<String, Object> getCategoryTotalList(Long no) {
+    //     Map<String, Object> resultMap = new LinkedHashMap<String,Object>();
+    //     List<LchCultureDetailCategoryEntity> cdclist = cdcRepo.findByCdcCcSeq(no);
+    //     List<CategoryTotalListVO> totallist = new ArrayList<>();
+    //     for(CategoryTotalListVO list : no) {
+
+    //     }
+
+    //     return resultMap;
+    // }
 
     // 소분류 카테고리 리스트 출력
     public DetailCategoryListResponseVO getDetailCategoryList(Long no) {
@@ -230,5 +244,6 @@ public class LchCultureService {
         }
         return response;
     }
+
 
 }

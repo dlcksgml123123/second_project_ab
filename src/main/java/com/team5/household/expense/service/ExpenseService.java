@@ -118,7 +118,7 @@ public class ExpenseService {
     }
 
     public ResponseEntity<Resource> getImagedownload(
-            @Parameter(description = "파일", example = "cat") @PathVariable String filename
+            @Parameter(description = "파일", example = "Expose_1676530079360.jpeg") @PathVariable String filename
     ) throws Exception
     {
         Path imgLocation = Paths.get(expense_img_path+"/"+filename).normalize();
