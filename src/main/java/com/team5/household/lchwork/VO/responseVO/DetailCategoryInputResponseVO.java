@@ -1,4 +1,4 @@
-package com.team5.household.lchwork.VO;
+package com.team5.household.lchwork.VO.responseVO;
 
 import com.team5.household.lchwork.entity.LchCultureDetailCategoryEntity;
 
