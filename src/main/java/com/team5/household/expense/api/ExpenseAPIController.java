@@ -65,7 +65,7 @@ public class ExpenseAPIController {
 
     @Operation(summary = "지출내역 생성", description = "지출내역을 생성합니다.")
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, Object> addExpense(
+    public ResponseEntity<Object> addExpense(
             @Parameter(description = "지출내역 제목", example ="") @RequestParam String ehTitle,
             @Parameter(description = "날짜", example = "2022-02-09T00:00:00") @RequestParam LocalDateTime ehDate,
             @Parameter(description = "회원 번호", example ="") @RequestParam Long ehMiSeq,
@@ -78,13 +78,13 @@ public class ExpenseAPIController {
             @Parameter(description = "문화 대분류 번호", example ="") @RequestParam Long ehCcSeq,
             @Parameter(description = "문화 소분류 번호", example ="") @RequestParam Long ehCdcSeq,
             @Parameter(description = "내용", example ="") @Nullable @RequestParam String ehContent
-    ) {
+    ) throws Exception{
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         eService.addEvent(ehTitle, ehDate, ehMiSeq, ehPiSeq, ehPrice, ehStoreName, ehImgFile, ehContent, ehLocation, ehBalance, ehCcSeq, ehCdcSeq);
         resultMap.put("status", true);
         resultMap.put("message", "내역이 등록되었습니다.");
         resultMap.put("code", HttpStatus.CREATED);
-        return resultMap;
+        return new ResponseEntity<>(resultMap, HttpStatus.OK);
     }
 }
 

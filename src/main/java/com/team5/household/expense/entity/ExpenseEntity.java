@@ -40,8 +40,6 @@ public class ExpenseEntity {
 
     @Column(name = "eh_store_name") private String ehStoreName;
 
-    @Column(name = "eh_img_url") private String ehImgUrl;
-
     @Column(name = "eh_img_file") private String ehImgFile;
 
     @Column(name = "eh_location") private String ehLocation;
