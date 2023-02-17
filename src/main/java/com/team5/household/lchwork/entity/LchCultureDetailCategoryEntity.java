@@ -28,4 +28,6 @@ public class LchCultureDetailCategoryEntity {
     @Column(name = "cdc_name") private String cdcName;
     @Schema(description = "대분류 카테고리 번호", example = "2")
     @Column(name = "cdc_cc_seq") private Long cdcCcSeq;
+    // @ManyToOne
+    // @JoinColumn(name = "cc_seq") Long cdcCcSeq;
 }

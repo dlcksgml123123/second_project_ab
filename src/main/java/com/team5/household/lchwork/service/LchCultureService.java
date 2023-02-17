@@ -91,7 +91,10 @@ public class LchCultureService {
             // resultMap.put("message", name+"과/와 동일한 카테고리명이 이미 존재합니다.");
         }
         else {
-            LchCultureCategoryEntity ccEntity = new LchCultureCategoryEntity(no, name, null);
+            // CategoryEntity entity = cateRepo.findById(seq).get();         
+            // entity.setCateName(name);
+            LchCultureCategoryEntity ccEntity = ccRepo.findByCcSeq(no); 
+            ccEntity.setCcName(name); // 수정할때 no까지 새로 입력하게되면 상세카테고리에 null뜸
             ccRepo.save(ccEntity);
             response.setUpdated(true);
             response.setMessage("카테고리 정보 수정이 완료되었습니다.");
