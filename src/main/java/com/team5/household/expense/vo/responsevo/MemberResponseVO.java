@@ -1,4 +1,4 @@
-package com.team5.household.expense.vo;
+package com.team5.household.expense.vo.responsevo;
 
 import lombok.Data;
 
