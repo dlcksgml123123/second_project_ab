@@ -123,7 +123,7 @@ public class ExpenseService {
     {
         Path imgLocation = Paths.get(expense_img_path+"/"+filename).normalize();
         Resource r = new UrlResource(imgLocation.toUri());
-
+        System.out.println(r.getFilename());
         String contentType = "application/octet-stream";
         // contentType = "image/*";
 
