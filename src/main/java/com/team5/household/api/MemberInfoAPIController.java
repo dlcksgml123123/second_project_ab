@@ -57,6 +57,7 @@ public class MemberInfoAPIController {
     // return new ResponseEntity<>(map, (HttpStatus) map.get("code"));
     // }
     //회원정보 삭제
+    @Operation(summary = "회원정보 삭제", description = "url에 seq번호를 이용해서 회원의 내용을 삭제합니다.")
     @DeleteMapping("/delete/{seq}")
     public ResponseEntity<UserResponseVO> deleteMember( 
         @Parameter(description = "seq번호를 입력해서 삭제를 합니다.")
