@@ -1,6 +1,6 @@
 package com.team5.household.service;
 
-import java.util.Date;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -11,8 +11,8 @@ import com.team5.household.entity.MemberInfoEntity;
 import com.team5.household.repository.MemberInfoRepository;
 import com.team5.household.vo.LoginVO;
 import com.team5.household.vo.MemberJoinVO;
-import com.team5.household.vo.MemberResponseVO;
-
+import com.team5.household.vo.responsevo.MemberResponseVO;
+import com.team5.household.vo.responsevo.UserResponseVO;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberService {
     private final MemberInfoRepository infoRepository;
     
+    //회원가입
     @Transactional
     public MemberResponseVO joinMember(MemberJoinVO data) {
         MemberInfoEntity newMember = new MemberInfoEntity(data);
@@ -31,7 +32,7 @@ public class MemberService {
         response.setNickname(data.getNickname());
         return response;
     }
-    
+    //회원 로그인
     public Map<String, Object> loginMember(LoginVO data) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         MemberInfoEntity user = null;
@@ -51,4 +52,18 @@ public class MemberService {
         }
         return resultMap;
     }
+    //회원정보 삭제
+    public UserResponseVO deleteMember(Long seq){
+        UserResponseVO response = new UserResponseVO();
+        if(infoRepository.countByMiSeq(seq) != 0){
+            infoRepository.deleteById(seq);
+            response.setStatus(true);
+            response.setMessage("선택한 회원의 정보가 삭제되었습니다.");
+        }else{
+            response.setStatus(false);
+            response.setMessage("삭제 할 회원이 없습니다.");
+        }
+        return response;
+    }
+    
 }

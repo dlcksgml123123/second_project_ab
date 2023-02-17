@@ -8,4 +8,5 @@ public interface MemberInfoRepository extends JpaRepository<MemberInfoEntity,Lon
     public MemberInfoEntity findByEmailAndPwd(String email, String pwd);
     public Integer countByEmail(String email);
     MemberInfoEntity findByMiSeq(Long miSeq);
+    public Integer countByMiSeq(Long Seq);
 }

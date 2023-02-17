@@ -1,21 +1,13 @@
 package com.team5.household.vo;
 
-
-import com.team5.household.entity.PaymentInfoEntity;
-
-import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class PaymentAddVO {
-    private int paymentType;
+    @Schema(description = "상태값으로 값을 입력합니다.(1:카드/2:계좌/3:현금)")
+    private Integer paymentType;
+    @Schema(description = "등록할 결제 수단의 이름을 입력합니다.")
     private String paymentName;
 
-    public PaymentAddVO(PaymentInfoEntity entity) {
-        this.paymentName = entity.getPiName();
-        this.paymentType = entity.getPiType();
-    }
 }
