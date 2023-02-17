@@ -121,12 +121,12 @@ public class ExpenseService {
         Path imgLocation = Paths.get(expense_img_path+"/"+filename).normalize();
         Resource r = new UrlResource(imgLocation.toUri());
         System.out.println(r.getFilename());
-        String contentType = "image/jpeg";
+        String contentType = "application/octet-stream";
         // contentType = "image/*";
 
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename =\"" + URLEncoder.encode(r.getFilename(), "UTF-8") + "\"")
+                        "attachment; filename=\"" + URLEncoder.encode(r.getFilename(), "UTF-8") + "\"")
                 .body(r);
     }
 }
