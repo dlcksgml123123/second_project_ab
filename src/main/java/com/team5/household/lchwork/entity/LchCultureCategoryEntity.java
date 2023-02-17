@@ -1,8 +1,10 @@
 package com.team5.household.lchwork.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,5 +30,8 @@ public class LchCultureCategoryEntity {
     @Column(name = "cc_seq") private Long ccSeq;
     @Schema(description = "대분류 카테고리 이름", example = "공연")
     @Column(name = "cc_name") private String ccName;
-    @OneToMany @JoinColumn(name="cdc_cc_seq") List<LchCultureDetailCategoryEntity> cdclist;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="cdc_cc_seq") List<LchCultureDetailCategoryEntity> cdclist;
+    // @OneToMany(mappedBy = "culture_category")
+    // List<LchCultureDetailCategoryEntity> cdclist = new ArrayList<LchCultureDetailCategoryEntity>();
 }

@@ -47,6 +47,7 @@ public class CultureCategoryController {
         @RequestParam String ccName
     ) {
         LchCultureCategoryEntity entity = LchCultureCategoryEntity.builder().ccName(ccName).build();
+        // LchCultureCategoryEntity entity = new LchCultureCategoryEntity(null, ccName);
         CategoryInputResponseVO map = cService.addCategory(entity);
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
