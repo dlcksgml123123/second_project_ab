@@ -13,4 +13,5 @@ public class PaymentResponseVO {
     private Boolean status;
     @Schema(description = "메세지")
     private String message;
+    
 }

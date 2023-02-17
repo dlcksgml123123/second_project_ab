@@ -1,7 +1,5 @@
 package com.team5.household.entity;
 
-import org.hibernate.annotations.DynamicInsert;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

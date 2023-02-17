@@ -35,13 +35,11 @@ public class MemberService {
     //회원 로그인
     public Map<String, Object> loginMember(LoginVO data) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
-        MemberInfoEntity user = null;
-        try {
-            user = infoRepository.findByEmailAndPwd(data.getEmail(), data.getPwd());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (user == null) {
+        MemberInfoEntity user = infoRepository.findByEmailAndPwd(data.getEmail(), data.getPwd());
+        MemberResponseVO userData = new MemberResponseVO();
+        userData.setEmail(user.getEmail());
+        userData.setNickname(user.getNickname());
+        if (user.equals(null)) {
             resultMap.put("status", false);
             resultMap.put("message", "이메일 또는 비밀번호 오류입니다.");
             resultMap.put("code", HttpStatus.BAD_REQUEST);
@@ -49,6 +47,7 @@ public class MemberService {
             resultMap.put("status", true);
             resultMap.put("message", "로그인 되었습니다.");
             resultMap.put("code", HttpStatus.ACCEPTED);
+            resultMap.put("userData", userData);
         }
         return resultMap;
     }
