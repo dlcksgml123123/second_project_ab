@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberInfoAPIController {
     private final MemberService mService;
-
+    
     @PostMapping("/join")
     public Map<String, Object> postMemberJoin(@RequestBody MemberJoinVO data){
         Map<String, Object> resultmap = new LinkedHashMap<>();

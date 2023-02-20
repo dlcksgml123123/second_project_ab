@@ -1,4 +1,4 @@
-package com.team5.household.Security.provider;
+package com.team5.household.security.provider;
 
 import java.security.Key;
 import java.util.Arrays;
@@ -13,8 +13,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
-import com.team5.household.Security.VO.TokenVO;
+import com.team5.household.security.vo.TokenVO;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -26,15 +27,16 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
 
+@Component
 public class JwtTokenProvider {
     private final Key key;
     private final Integer tokenExpireMinutes = 10;
     private final Integer refreshExpireMinutes = 60;
-    
+        
     public JwtTokenProvider(@Value("${jwt.secretKey}") String secretKey){
         //secret값을 base64 decode(복호화)하여 key 변수에 할당하기 위함
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        this.key = Keys.hmacShaKeyFor(keyBytes);
+        this.key = Keys.hmacShaKeyFor(keyBytes); 
     }
 
     public TokenVO generaToken(Authentication authentication){

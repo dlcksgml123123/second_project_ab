@@ -16,8 +16,7 @@ spring:
       enabled: true
       max-file-size: 100MB
       max-request-size: 110MB
-
-
+    
 # Swagger Settings
 springdoc:
   default-consumes-media-type: application/json
@@ -33,3 +32,5 @@ springdoc:
       doc-expansion: none
   paths-to-match:
       - /api/**
+jwt:
+  secretKey: sdkljghsduigbhweiolhgsdnksldngoisdjfldajftiokhjsdfsdfewrstyewr
