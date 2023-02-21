@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.team5.household.repository.MemberInfoRepository;
 import com.team5.household.service.MemberService;
-import com.team5.household.vo.LoginVO;
-import com.team5.household.vo.MemberJoinVO;
-import com.team5.household.vo.responsevo.MemberResponseVO;
-import com.team5.household.vo.responsevo.UserResponseVO;
+import com.team5.household.vo.membervo.LoginVO;
+import com.team5.household.vo.membervo.MemberJoinVO;
+import com.team5.household.vo.membervo.MemberListVO;
+import com.team5.household.vo.membervo.MemberResponseVO;
+import com.team5.household.vo.membervo.MemberUpdateVO;
+import com.team5.household.vo.membervo.MemberUpdateResponseVO;
+import com.team5.household.vo.membervo.UserUpdateVO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -43,28 +47,32 @@ public class MemberInfoAPIController {
     //로그인
     @PostMapping("/login")
     @Operation(summary = "회원 로그인", description = "")
-    public Map<String, Object> postMemberLogin(@RequestBody LoginVO login) {
-        Map<String, Object> resultMap = mService.loginMember(login);
-        return resultMap;
+    public ResponseEntity<MemberResponseVO> postMemberLogin(@RequestBody LoginVO login) {
+        MemberResponseVO resultMap  = mService.loginMember(login);
+        return new ResponseEntity<>(resultMap, HttpStatus.OK);
     }
-    //회원정보 조회
-    
+
     //회원정보 수정
-    // @PostMapping("/update{seq}")
-    // public ResponseEntity<Object> postMemberupdate(@PathVariable Long seq, @RequestBody UserUpdateVO userUpdate) {
-    // Map<String, Object> map = new LinkedHashMap<>();
-    // map = mService.updateMember();
-    // return new ResponseEntity<>(map, (HttpStatus) map.get("code"));
-    // }
+    @PostMapping("/update/{seq}")
+    public ResponseEntity<MemberUpdateResponseVO> postMemberupdate(@PathVariable Long seq, @RequestBody MemberUpdateVO data) {
+        MemberUpdateResponseVO response = mService.updateMember(seq, data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     //회원정보 삭제
     @Operation(summary = "회원정보 삭제", description = "url에 seq번호를 이용해서 회원의 내용을 삭제합니다.")
     @DeleteMapping("/delete/{seq}")
-    public ResponseEntity<UserResponseVO> deleteMember( 
+    public ResponseEntity<MemberUpdateResponseVO> deleteMember( 
         @Parameter(description = "seq번호를 입력해서 삭제를 합니다.")
         @PathVariable Long seq){
-       UserResponseVO response = mService.deleteMember(seq);
-       return new ResponseEntity<>(response, HttpStatus.OK);
+        MemberUpdateResponseVO response = mService.deleteMember(seq);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    
+    @Operation(summary = "회원 리스트 전체조회", description = "회원정보를 모두 조회합니다.")
+    @GetMapping("/listall")
+    public ResponseEntity<MemberListVO> getMemberListAll(){
+        MemberListVO memberList = mService.listall();
+        return new ResponseEntity<>(memberList, HttpStatus.CREATED);
+    }
 }
 

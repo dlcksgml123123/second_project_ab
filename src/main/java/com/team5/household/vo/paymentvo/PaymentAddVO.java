@@ -1,4 +1,4 @@
-package com.team5.household.vo;
+package com.team5.household.vo.paymentvo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

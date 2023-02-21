@@ -1,4 +1,4 @@
-package com.team5.household.vo;
+package com.team5.household.vo.membervo;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
