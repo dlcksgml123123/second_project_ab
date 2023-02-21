@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.household.config.KakaoValue;
 import com.team5.household.entity.KakaoMemberInfoEntity;
 import com.team5.household.repository.KakaoMemberRepository;
+import com.team5.household.security.provider.JwtTokenProvider;
 import com.team5.household.vo.KakaoUserInfoVO;
 import com.team5.household.vo.OAuthTokenVO;
 
@@ -26,7 +27,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KakaoAuthService {
     private final KakaoMemberRepository kakaoMemberRepository;
-
+    private final JwtTokenProvider jwtTokenProvider;
+    
     public Boolean isDuplicatedEmail(String email){
         if(kakaoMemberRepository.countByEmail(email) > 0) {
             return true;
@@ -87,12 +89,11 @@ public class KakaoAuthService {
         String email = (String)account.get("email");
         
         if(isDuplicatedEmail(email)){
-            KakaoUserInfoVO userData = new KakaoUserInfoVO(email, nickname);
-            // KakaoMemberInfoEntity kakaoUser = new KakaoMemberInfoEntity(userData);
+            KakaoUserInfoVO userData = new KakaoUserInfoVO(email, nickname, jwtTokenProvider.generToken(email));
             return userData;
         }
         else{
-            KakaoUserInfoVO userData = new KakaoUserInfoVO(email, nickname);
+            KakaoUserInfoVO userData = new KakaoUserInfoVO(email, nickname, jwtTokenProvider.generToken(email));
             KakaoMemberInfoEntity kakaoUser = new KakaoMemberInfoEntity(userData);
             kakaoMemberRepository.save(kakaoUser);
             return userData;

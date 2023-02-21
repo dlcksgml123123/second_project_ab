@@ -39,15 +39,17 @@ public class JwtTokenProvider {
         this.key = Keys.hmacShaKeyFor(keyBytes); 
     }
 
-    public TokenVO generaToken(Authentication authentication){
+    // public TokenVO generToken(Authentication authentication){
+    public TokenVO generToken(String email){
         // .collect(Collectors.joining(",") 참고자료:(https://bactoria.tistory.com/entry/%EC%9E%90%EB%B0%948-collectCollectorsjoining-%EB%9E%8C%EB%8B%A4)
-        String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(", "));
+        // String authorities = email.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(", "));
         Date expires = new Date((new Date()).getTime()+tokenExpireMinutes*60*1000);
         Date refreshExpires = new Date((new Date()).getTime()+refreshExpireMinutes*60*1000);
         String accessToken = Jwts.builder()
                                 // JWT payload 에 저장되는 정보단위
-                                .setSubject(authentication.getName())
-                                .claim("auth", authorities)
+                                // .setSubject(email.getName())
+                                // .claim("auth", authorities)
+                                .claim("email", email)
                                 .setExpiration(expires)
                                 // JWT를 서명하기위해 SecretKey나 PrivateKey를 지정한다. 압축하고 서명하기 위해 compact()를 호출하고, accessToken 생성
                                 .signWith(key, SignatureAlgorithm.HS256).compact();

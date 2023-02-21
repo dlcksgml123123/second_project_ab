@@ -30,8 +30,7 @@ public class KakaoLoginAPIController {
 
         /*
          * RestTemplate rt = new RestTemplate();
-
-        // HttpHeader 오브젝트 생성
+         * // HttpHeader 오브젝트 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
@@ -56,6 +55,7 @@ public class KakaoLoginAPIController {
             e.printStackTrace();
         }
         System.out.println("카카오 엑세스 토큰: "+authTokenVO.getAccess_token());
+        
          */
                 
         /*
@@ -87,6 +87,4 @@ public class KakaoLoginAPIController {
 
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
-    
-    
 }

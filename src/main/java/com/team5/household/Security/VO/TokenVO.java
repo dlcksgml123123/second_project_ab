@@ -1,4 +1,4 @@
-package com.team5.household.Security.vo;
+package com.team5.household.security.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

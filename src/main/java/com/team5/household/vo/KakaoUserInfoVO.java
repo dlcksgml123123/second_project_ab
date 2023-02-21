@@ -1,5 +1,7 @@
 package com.team5.household.vo;
 
+import com.team5.household.security.vo.TokenVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,4 +10,5 @@ import lombok.Data;
 public class KakaoUserInfoVO {
     private String email;
     private String nickname;
+    private TokenVO authorization;
 }

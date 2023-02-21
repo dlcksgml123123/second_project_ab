@@ -1,4 +1,4 @@
-package com.team5.household.Security.filter;
+package com.team5.household.security.filter;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
-import com.team5.household.Security.provider.JwtTokenProvider;
+import com.team5.household.security.provider.JwtTokenProvider;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
