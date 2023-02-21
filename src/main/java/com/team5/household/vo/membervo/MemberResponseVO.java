@@ -9,8 +9,4 @@ public class MemberResponseVO {
     private String nickname;
     private String message;
 
-    public void setMemberResponseVO(String email, String nickname){
-        this.email = email;
-        this.nickname = nickname;
-    }
 }
