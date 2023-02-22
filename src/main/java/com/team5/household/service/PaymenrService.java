@@ -1,16 +1,18 @@
 package com.team5.household.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.team5.household.entity.PaymentInfoEntity;
 import com.team5.household.repository.PaymentInfoRepository;
-import com.team5.household.vo.PaymentVO;
-import com.team5.household.vo.responsevo.PaymentListVO;
-import com.team5.household.vo.responsevo.PaymentResponseVO;
+import com.team5.household.vo.paymentVO.PaymentAddResponseVO;
+import com.team5.household.vo.paymentVO.PaymentAddVO;
+import com.team5.household.vo.paymentVO.PaymentListVO;
+import com.team5.household.vo.paymentVO.PaymentResponseVO;
+
+import net.bytebuddy.asm.Advice.Return;
+
 
 
 
@@ -18,21 +20,14 @@ import com.team5.household.vo.responsevo.PaymentResponseVO;
 public class PaymenrService {
     @Autowired PaymentInfoRepository pRepo;
     //결제수단 등록
-    public PaymentResponseVO addPayment(PaymentInfoEntity data){
-        PaymentResponseVO add = new PaymentResponseVO();
-        List<PaymentInfoEntity> payList = pRepo.findAll();
-        PaymentInfoEntity entity = pRepo.findByPiName(data.getPiName());//같은 카드 이름 중복 제거 
-        if(payList.size() >=20){
-            add.setStatus(false);
-            add.setMessage("결제 수단을 20개 이상 등록할 수 없습니다.");
-        }
-        else {
-            entity = new PaymentInfoEntity(null,data.getPiType(),data.getPiName());
-            pRepo.save(entity);
-            add.setStatus(true);
-            add.setMessage("결제수단 등록 완료되었습니다.");
-        }
-        return add;
+    public PaymentAddResponseVO addPayment(PaymentAddVO data){
+        PaymentInfoEntity addPayment = new PaymentInfoEntity(data);
+        pRepo.save(addPayment);
+        PaymentAddResponseVO response = new PaymentAddResponseVO();
+        response.setPaymentType(addPayment.getPiType());
+        response.setPaymentName(addPayment.getPiName());
+        response.setMessage("결제수단이 등록되었습니다!");
+        return response;
     }
     //결제수단 조회
     public PaymentResponseVO checkPayment(Integer type){
@@ -42,6 +37,7 @@ public class PaymenrService {
        if(payList.size() != 0){
         response.setStatus(true);
         response.setMessage("카테고리 조회 성공");
+        response.setPayList(payList);
 
        }else{
            response.setStatus(false);
@@ -63,6 +59,7 @@ public class PaymenrService {
         }
         return response;   
     }
+    //결제 수단 전부 조회
     public PaymentListVO listall(){
         PaymentListVO response = new PaymentListVO();
         List<PaymentInfoEntity> payList = pRepo.findAll();

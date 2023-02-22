@@ -1,18 +1,19 @@
 package com.team5.household.service;
 
+import java.util.List;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.team5.household.entity.MemberInfoEntity;
 import com.team5.household.repository.MemberInfoRepository;
-import com.team5.household.vo.LoginVO;
-import com.team5.household.vo.MemberJoinVO;
-import com.team5.household.vo.responsevo.MemberResponseVO;
-import com.team5.household.vo.responsevo.UserResponseVO;
+import com.team5.household.vo.memberVO.LoginVO;
+import com.team5.household.vo.memberVO.MemberJoinVO;
+import com.team5.household.vo.memberVO.MemberResponseVO;
+import com.team5.household.vo.memberVO.MemberUpdateResponseVO;
+import com.team5.household.vo.memberVO.MemberUpdateVO;
+import com.team5.household.vo.memberVO.MemberListVO;
+import com.team5.household.vo.memberVO.UserResponseVO;
+
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -33,23 +34,13 @@ public class MemberService {
         return response;
     }
     //회원 로그인
-    public Map<String, Object> loginMember(LoginVO data) {
-        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+    public MemberResponseVO loginMember(LoginVO data) {
         MemberInfoEntity user = infoRepository.findByEmailAndPwd(data.getEmail(), data.getPwd());
         MemberResponseVO userData = new MemberResponseVO();
         userData.setEmail(user.getEmail());
         userData.setNickname(user.getNickname());
-        if (user.equals(null)) {
-            resultMap.put("status", false);
-            resultMap.put("message", "이메일 또는 비밀번호 오류입니다.");
-            resultMap.put("code", HttpStatus.BAD_REQUEST);
-        } else {
-            resultMap.put("status", true);
-            resultMap.put("message", "로그인 되었습니다.");
-            resultMap.put("code", HttpStatus.ACCEPTED);
-            resultMap.put("userData", userData);
-        }
-        return resultMap;
+        userData.setMessage("로그인 성공");
+        return userData;
     }
     //회원정보 삭제
     public UserResponseVO deleteMember(Long seq){
@@ -64,5 +55,29 @@ public class MemberService {
         }
         return response;
     }
-    
+    //회원 리스트 전부 조회
+    public MemberListVO listAll(){
+        MemberListVO response = new MemberListVO();
+        List<MemberInfoEntity> memberList = infoRepository.findAll();
+        if(memberList != null){
+            response.setStatus(true);
+            response.setMessage("회원 리스트 조회 성공");
+            response.setMemberList(memberList);
+        }else{
+            response.setStatus(false);
+            response.setMessage("조회할 리스트가 없습니다.");
+        }
+        return response;    
+    }
+    //회원정보 수정
+    public MemberUpdateResponseVO updateMember(Long seq, MemberUpdateVO data){
+        MemberUpdateResponseVO response = new MemberUpdateResponseVO();
+        MemberInfoEntity member = infoRepository.findByMiSeq(seq).orElseThrow();
+        response.setData(data);
+        member.setMemberInfo(data);
+        infoRepository.save(member);
+        response.setStatus(true);
+        response.setMessage("회원정보가 변경되었습니다.");
+        return response;
+    }
 }

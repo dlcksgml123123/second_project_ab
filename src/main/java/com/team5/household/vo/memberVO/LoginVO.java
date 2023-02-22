@@ -1,4 +1,4 @@
-package com.team5.household.vo;
+package com.team5.household.vo.memberVO;
 
 
 import lombok.Data;

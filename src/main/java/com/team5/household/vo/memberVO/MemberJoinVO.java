@@ -1,4 +1,4 @@
-package com.team5.household.vo;
+package com.team5.household.vo.memberVO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -22,9 +22,4 @@ public class MemberJoinVO {
     @NotBlank
     private String nickname;
 
-    // public MemberJoinVO(MemberInfoEntity entity){
-    //     this.MemberEmail = entity.getMiEmail();
-    //     this.Membernickname = entity.getMiNickname();
-    //     return new MemberJoinVO(entity);
-    // }
 }

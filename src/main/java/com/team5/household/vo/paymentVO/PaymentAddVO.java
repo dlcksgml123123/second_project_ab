@@ -1,4 +1,4 @@
-package com.team5.household.vo;
+package com.team5.household.vo.paymentVO;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -9,5 +9,6 @@ public class PaymentAddVO {
     private Integer paymentType;
     @Schema(description = "등록할 결제 수단의 이름을 입력합니다.")
     private String paymentName;
+    private String message;
 
 }

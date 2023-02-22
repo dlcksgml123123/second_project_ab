@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.team5.household.entity.PaymentInfoEntity;
 import com.team5.household.repository.PaymentInfoRepository;
 import com.team5.household.service.PaymenrService;
-import com.team5.household.vo.PaymentAddVO;
-import com.team5.household.vo.responsevo.PaymentListVO;
-import com.team5.household.vo.responsevo.PaymentResponseVO;
+import com.team5.household.vo.paymentVO.PaymentAddResponseVO;
+import com.team5.household.vo.paymentVO.PaymentAddVO;
+import com.team5.household.vo.paymentVO.PaymentListVO;
+import com.team5.household.vo.paymentVO.PaymentResponseVO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,21 +29,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class PaymentAPIController {
     @Autowired PaymenrService pService;
     @Autowired PaymentInfoRepository pRepo;
-    @Operation(summary = "결제 수단 등록", description = "결제수단 최대 20개까지 등록합니다.")
     //결제 수단 등록
+    @Operation(summary = "결제 수단 등록", description ="입력 예시(type:1.카드/2.계좌/3.현금 Name:카드 또는 은행 이름)")
     @PostMapping("/add")
-    public ResponseEntity<PaymentResponseVO> postPaymentAdd(
-        @Parameter(description = "VO를 ")
+    public ResponseEntity<PaymentAddResponseVO> postPaymentAdd(
+        @Parameter(description = "")
         @RequestBody PaymentAddVO data){
-        PaymentInfoEntity entity = PaymentInfoEntity.builder()
-        .piType(data.getPaymentType())
-        .piName(data.getPaymentName())
-        .build();
-        PaymentResponseVO response = pService.addPayment(entity);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        PaymentAddResponseVO response = pService.addPayment(data);
+       return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-    @Operation(summary = "결제수단 리스트 조회", description="type별로 검색가능합니다.")
     //결제수단 조회
+    @Operation(summary = "결제수단 리스트 조회", description="type별로 검색가능합니다.")
     @GetMapping("/list/{type}")
     public ResponseEntity<PaymentResponseVO> getPaymentList(
         @Parameter(description = "pathvariable로 데이터를 입력합니다.(type:1.카드/2.계좌/3.현금)")    
@@ -50,15 +47,13 @@ public class PaymentAPIController {
         PaymentResponseVO map = pService.checkPayment(type);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
+    //결제수단 전체 조회
     @Operation(summary = "결제수단 리스트 전체조회", description = "결제수단을 모두 조회합니다.")
     @GetMapping("/listall")
     public ResponseEntity<PaymentListVO> getPaymentListAll(){
         PaymentListVO payList = pService.listall();
         return new ResponseEntity<>(payList, HttpStatus.CREATED);
     }
-    //결제수단 수정
-    // @PutMapping("/update")
-    
     //결제수단 삭제
     @Operation(summary = "결제 수단 삭제", description = "URL에 seq번호를 입력하여 데이터베이스 삭제합니다.")
     @DeleteMapping("/delete/{seq}")
