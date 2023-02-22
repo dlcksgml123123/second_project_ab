@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.team5.household.entity.PaymentInfoEntity;
 import com.team5.household.repository.PaymentInfoRepository;
 import com.team5.household.service.PaymenrService;
 import com.team5.household.vo.paymentVO.PaymentAddResponseVO;
 import com.team5.household.vo.paymentVO.PaymentAddVO;
+import com.team5.household.vo.paymentVO.PaymentDeleteResponseVO;
 import com.team5.household.vo.paymentVO.PaymentListVO;
 import com.team5.household.vo.paymentVO.PaymentResponseVO;
 
@@ -30,7 +29,7 @@ public class PaymentAPIController {
     @Autowired PaymenrService pService;
     @Autowired PaymentInfoRepository pRepo;
     //결제 수단 등록
-    @Operation(summary = "결제 수단 등록", description ="입력 예시(type:1.카드/2.계좌/3.현금 Name:카드 또는 은행 이름)")
+    @Operation(summary = "결제 수단 등록", description ="paymentType / paymentName 사용")
     @PostMapping("/add")
     public ResponseEntity<PaymentAddResponseVO> postPaymentAdd(
         @Parameter(description = "")
@@ -57,10 +56,10 @@ public class PaymentAPIController {
     //결제수단 삭제
     @Operation(summary = "결제 수단 삭제", description = "URL에 seq번호를 입력하여 데이터베이스 삭제합니다.")
     @DeleteMapping("/delete/{seq}")
-    public ResponseEntity<PaymentResponseVO> deletePayment(
+    public ResponseEntity<PaymentDeleteResponseVO> deletePayment(
         @Parameter(description = "seq번호를 입력해서 삭제를 합니다.")
         @PathVariable Long seq){
-            PaymentResponseVO response = pService.deletePayment(seq);
+            PaymentDeleteResponseVO response = pService.deletePayment(seq);
             return new ResponseEntity<>(response, HttpStatus.OK);
 
     }

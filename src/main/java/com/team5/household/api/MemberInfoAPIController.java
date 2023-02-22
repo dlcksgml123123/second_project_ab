@@ -46,7 +46,7 @@ public class MemberInfoAPIController {
     }
     //로그인
     @PostMapping("/login")
-    @Operation(summary = "회원 로그인", description = "")
+    @Operation(summary = "회원 로그인", description = "email,pwd 사용")
     public ResponseEntity<MemberResponseVO> postMemberLogin(@RequestBody LoginVO login) {
         MemberResponseVO resultMap  = mService.loginMember(login);
         return new ResponseEntity<>(resultMap, HttpStatus.OK);

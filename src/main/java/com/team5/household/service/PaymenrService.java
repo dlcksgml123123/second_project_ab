@@ -8,12 +8,9 @@ import com.team5.household.entity.PaymentInfoEntity;
 import com.team5.household.repository.PaymentInfoRepository;
 import com.team5.household.vo.paymentVO.PaymentAddResponseVO;
 import com.team5.household.vo.paymentVO.PaymentAddVO;
+import com.team5.household.vo.paymentVO.PaymentDeleteResponseVO;
 import com.team5.household.vo.paymentVO.PaymentListVO;
 import com.team5.household.vo.paymentVO.PaymentResponseVO;
-
-import net.bytebuddy.asm.Advice.Return;
-
-
 
 
 @Service
@@ -46,8 +43,8 @@ public class PaymenrService {
        return response;
     }
     //결제수단 삭제 
-    public PaymentResponseVO deletePayment(Long seq){
-        PaymentResponseVO response = new PaymentResponseVO();
+    public PaymentDeleteResponseVO deletePayment(Long seq){
+        PaymentDeleteResponseVO response = new PaymentDeleteResponseVO();
         if(pRepo.countByPiSeq(seq) != 0){ 
             pRepo.deleteById(seq);
             response.setStatus(true); 
