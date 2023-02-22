@@ -1,7 +1,13 @@
 package com.team5.household.expense.service;
 
 import com.team5.household.expense.entity.ExpenseEntity;
+import com.team5.household.expense.entity.PaymentInfoEntity;
 import com.team5.household.expense.repository.ExpenseRepository;
+import com.team5.household.expense.repository.PaymentInfoRepository;
+import com.team5.household.lchwork.entity.LchCultureCategoryEntity;
+import com.team5.household.lchwork.entity.LchCultureDetailCategoryEntity;
+import com.team5.household.lchwork.repository.LchCultureCategoryRepository;
+import com.team5.household.lchwork.repository.LchCultureDetailCategoryRepository;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +40,9 @@ import java.util.Map;
 @Service
 public class ExpenseService {
     @Autowired ExpenseRepository eRepo;
+    @Autowired LchCultureCategoryRepository lRepo;
+    @Autowired LchCultureDetailCategoryRepository ldRepo;
+    @Autowired PaymentInfoRepository pRepo;
     @Value("${file.image.expense}") String expense_img_path;
 
 
@@ -67,7 +76,7 @@ public class ExpenseService {
         int width = 512;
         int height = 512;
         Image newImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        // 줄인 이미지를 BufferedImage 객체로 변환한다.
+        // 줄인 이미지를 BufferedImage 객체로 변환한    다.
         BufferedImage outputImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = outputImage.createGraphics();
         graphics.drawImage(newImage, 0, 0, null);
@@ -113,6 +122,7 @@ public class ExpenseService {
         map.put("currentPage", page.getNumber());
         return map;
     }
+
 
     public ResponseEntity<Resource> getImagedownload(
             @Parameter(description = "파일", example = "Expose_1676530079360.jpeg") @PathVariable String filename
