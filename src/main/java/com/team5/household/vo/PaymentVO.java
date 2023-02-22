@@ -1,4 +1,4 @@
-package com.team5.household.vo.paymentvo;
+package com.team5.household.vo;
 
 
 

@@ -1,12 +1,16 @@
 package com.team5.household.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.team5.household.entity.PaymentInfoEntity;
 import com.team5.household.repository.PaymentInfoRepository;
-import com.team5.household.vo.paymentvo.PaymentListVO;
-import com.team5.household.vo.paymentvo.PaymentResponseVO;
+import com.team5.household.vo.PaymentVO;
+import com.team5.household.vo.responsevo.PaymentListVO;
+import com.team5.household.vo.responsevo.PaymentResponseVO;
 
 
 
@@ -38,7 +42,6 @@ public class PaymenrService {
        if(payList.size() != 0){
         response.setStatus(true);
         response.setMessage("카테고리 조회 성공");
-        
 
        }else{
            response.setStatus(false);
