@@ -4,14 +4,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.team5.household.security.vo.TokenVO;
 import com.team5.household.service.MemberService;
+import com.team5.household.vo.LoginVO;
 import com.team5.household.vo.MemberJoinVO;
-import com.team5.household.vo.MemberResponseVO;
+import com.team5.household.vo.membervo.MemberResponseVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,5 +33,13 @@ public class MemberInfoAPIController {
         resultmap.put("status", HttpStatus.CREATED);
         return resultmap;
     }
+    
+    @PostMapping("/login")
+    public ResponseEntity<MemberResponseVO> postMemberLogin(@RequestBody LoginVO login) {
+        MemberResponseVO memberData = mService.loginMember(login);
+        return new ResponseEntity<>(memberData, HttpStatus.OK);
+    }
+
+    
     
 }

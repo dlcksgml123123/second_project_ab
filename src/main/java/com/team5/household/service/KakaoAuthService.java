@@ -18,6 +18,8 @@ import com.team5.household.config.KakaoValue;
 import com.team5.household.entity.KakaoMemberInfoEntity;
 import com.team5.household.repository.KakaoMemberRepository;
 import com.team5.household.security.provider.JwtTokenProvider;
+import com.team5.household.security.vo.TokenVO;
+import com.team5.household.vo.KakaoNewUserInfoVO;
 import com.team5.household.vo.KakaoUserInfoVO;
 import com.team5.household.vo.OAuthTokenVO;
 
@@ -27,7 +29,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KakaoAuthService {
     private final KakaoMemberRepository kakaoMemberRepository;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final Token token;
     
     public Boolean isDuplicatedEmail(String email){
         if(kakaoMemberRepository.countByEmail(email) > 0) {
@@ -87,17 +89,18 @@ public class KakaoAuthService {
         JSONObject profile = (JSONObject)account.get("profile");
         String nickname = (String)profile.get("nickname");
         String email = (String)account.get("email");
+
         
         if(isDuplicatedEmail(email)){
-            KakaoUserInfoVO userData = new KakaoUserInfoVO(email, nickname, jwtTokenProvider.generToken(email));
+            KakaoUserInfoVO userData = new KakaoUserInfoVO(email, nickname);
             return userData;
         }
         else{
-            KakaoUserInfoVO userData = new KakaoUserInfoVO(email, nickname, jwtTokenProvider.generToken(email));
-            KakaoMemberInfoEntity kakaoUser = new KakaoMemberInfoEntity(userData);
+            KakaoUserInfoVO infoVO = new KakaoUserInfoVO(email, nickname);
+            KakaoMemberInfoEntity kakaoUser = new KakaoMemberInfoEntity(infoVO);
             kakaoMemberRepository.save(kakaoUser);
+            KakaoUserInfoVO userData = new KakaoUserInfoVO(email, nickname);
             return userData;
         }
-        
     }
 }

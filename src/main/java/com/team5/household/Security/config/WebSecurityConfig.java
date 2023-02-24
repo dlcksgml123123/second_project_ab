@@ -30,8 +30,8 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 // 요청에 대한 보안 설정을 시작함
                 .and().authorizeHttpRequests()
-                .requestMatchers("/*", "/api/members/join", "/swagger-ui/**", "/api/members/login", "/oauth/**").permitAll()
-                .requestMatchers("/api/**").authenticated()
+                .requestMatchers("/**", "/api/members/join", "/swagger-ui/**", "/api/members/login", "/oauth/**").permitAll()
+                // .requestMatchers("/api/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 // JwtAuthenticationFilter를 UsernamePasswordAuthentictaionFilter 전에 적용
