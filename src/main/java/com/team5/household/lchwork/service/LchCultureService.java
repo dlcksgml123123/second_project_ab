@@ -54,7 +54,7 @@ public class LchCultureService {
                 response.setMessage(data.getCcName()+"은/는 이미 등록된 대분류 카테고리 입니다.");
             }
             else {
-                ccEntity = new LchCultureCategoryEntity(null, data.getCcName(), null);
+                ccEntity = new LchCultureCategoryEntity(null, data.getCcName(), null, null);
                 ccRepo.save(ccEntity);
                 // resultMap.put("ccEntity", ccEntity);
                 // resultMap.put("status", true);

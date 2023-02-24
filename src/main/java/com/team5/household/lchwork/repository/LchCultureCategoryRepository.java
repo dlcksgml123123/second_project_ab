@@ -12,4 +12,8 @@ public interface LchCultureCategoryRepository extends JpaRepository<LchCultureCa
     public Integer countByCcName(String ccName);
     public Integer countByCcSeq(Long ccSeq);
     public List<LchCultureCategoryEntity> findByccSeq(Long ccSeq);
+    ///////////////////////////////////////////////////////////////////////
+    public List<LchCultureCategoryEntity> findByCcMiSeq(Long ccMiSeq);
+    public LchCultureCategoryEntity findByCcNameAndCcMiSeq(String ccName, Long ccMiSeq);
+    public Integer countByCcNameAndCcMiSeq(String ccName, Long ccMiSeq);
 }
