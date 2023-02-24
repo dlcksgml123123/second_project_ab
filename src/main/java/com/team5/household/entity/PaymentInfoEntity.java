@@ -25,10 +25,12 @@ public class PaymentInfoEntity {
     @Column(name="pi_seq") private Long piSeq;
     @Column(name="pi_type") private Integer piType;
     @Column(name="pi_name") private String piName;
+    @Column(name ="pi_mi_seq") private  Long piMiSeq;
 
-    @Builder
-    public PaymentInfoEntity(PaymentAddVO data){
-        this.piType = data.getPaymentType();
-        this.piName = data.getPaymentName();
-    }
+
+//    @Builder
+//    public PaymentInfoEntity(PaymentAddVO data){
+//        this.piType = data.getPaymentType();
+//        this.piName = data.getPaymentName();
+//    }
 }
