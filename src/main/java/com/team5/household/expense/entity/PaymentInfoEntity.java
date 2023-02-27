@@ -23,15 +23,15 @@ import lombok.NoArgsConstructor;
 public class PaymentInfoEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="pi_seq") private Long piSeq;
-    @Column(name="pi_type") private Integer piType;
+    @Column(name="pi_type") private Long piType;
     @Column(name="pi_name") private String piName;
-    @Column(name ="pi_mi_seq") private  Long piMiSeq;
+    @Column(name ="pi_mi_seq") private Long piMiSeq;
 
 
     @Builder
     public PaymentInfoEntity(PaymentAddVO data){
-        this.piType = data.getPaymentType();
-        this.piName = data.getPaymentName();
+        this.piType = data.getType();
+        this.piName = data.getPayment();
         this.piMiSeq = data.getMemberSeq();
     }
 }
