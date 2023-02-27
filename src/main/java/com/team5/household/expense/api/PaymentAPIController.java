@@ -8,8 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.team5.household.expense.vo.paymentVO.PaymentAddResponseVO;
+import com.team5.household.expense.vo.paymentVO.PaymentAddVO;
 import com.team5.household.expense.vo.paymentVO.PaymentDeleteResponseVO;
 import com.team5.household.expense.vo.paymentVO.PaymentListVO;
 import com.team5.household.expense.vo.paymentVO.PaymentResponseVO;
@@ -29,7 +34,8 @@ public class PaymentAPIController {
     //결제 수단 등록
     @Operation(summary = "결제 수단 등록", description ="paymentType / paymentName 사용")
     @PostMapping("/add/{email}")
-    public ResponseEntity<PaymentAddResponseVO> postPaymentAdd(@Parameter(description = "") @RequestBody PaymentAddVO data, @PathVariable String email){
+    public ResponseEntity<PaymentAddResponseVO> postPaymentAdd(@Parameter(description = "") 
+    @RequestBody PaymentAddVO data, @PathVariable String email){
         PaymentAddResponseVO response = pService.addPayment(email, data);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);

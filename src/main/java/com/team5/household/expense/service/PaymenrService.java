@@ -6,10 +6,11 @@ import com.team5.household.expense.repository.MemberInfoRepository;
 import com.team5.household.expense.repository.PaymentInfoRepository;
 import com.team5.household.expense.vo.paymentVO.PaymentDeleteResponseVO;
 import com.team5.household.expense.vo.paymentVO.PaymentListVO;
-import com.team5.household.expense.vo.paymentVO.PaymentResponseVO;
 import com.team5.household.expense.vo.paymentVO.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.team5.household.expense.entity.MemberInfoEntity;
 import com.team5.household.expense.entity.PaymentInfoEntity;
 
 
