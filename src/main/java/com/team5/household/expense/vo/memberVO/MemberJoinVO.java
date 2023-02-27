@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 @Data
 @NoArgsConstructor
@@ -21,5 +22,9 @@ public class MemberJoinVO {
 
     @NotBlank
     private String nickname;
+
+    @NotNull
+    @ColumnDefault("USER")
+    private String role;
 
 }

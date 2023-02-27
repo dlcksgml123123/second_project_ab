@@ -1,5 +1,6 @@
 package com.team5.household.expense.vo;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,6 +23,8 @@ public class MemberJoinVO {
     @NotBlank
     private String nickname;
 
+    @Nullable
+    private String role;
     // public MemberJoinVO(MemberInfoEntity entity){
     //     this.MemberEmail = entity.getMiEmail();
     //     this.Membernickname = entity.getMiNickname();

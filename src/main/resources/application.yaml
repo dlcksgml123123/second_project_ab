@@ -36,3 +36,6 @@ springdoc:
 file:
   image:
     expense: /home/expense/image/history
+
+jwt:
+  secretKey: sdkljghsduigbhweiolhgsdnksldngoisdjfldajftiokhjsdfsdfewrstyewr

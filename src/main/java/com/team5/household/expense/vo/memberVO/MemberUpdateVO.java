@@ -18,4 +18,6 @@ public class MemberUpdateVO {
     private Integer gen;
     @Schema(description = "회원 직업")
     private String job;
+    @Schema(description = "회원 정보")
+    private String miRole;
 }

@@ -2,9 +2,12 @@ package com.team5.household.expense.service;
 
 import java.util.List;
 
+import com.team5.household.expense.Security.provider.JwtTokenProvider;
 import com.team5.household.expense.repository.MemberInfoRepository;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.core.Authentication;
 import com.team5.household.expense.entity.MemberInfoEntity;
 import com.team5.household.expense.vo.memberVO.LoginVO;
 import com.team5.household.expense.vo.memberVO.MemberJoinVO;
@@ -13,6 +16,7 @@ import com.team5.household.expense.vo.memberVO.MemberUpdateResponseVO;
 import com.team5.household.expense.vo.memberVO.MemberUpdateVO;
 import com.team5.household.expense.vo.memberVO.MemberListVO;
 import com.team5.household.expense.vo.memberVO.UserResponseVO;
+import com.team5.household.expense.Security.VO.TokenVO;
 
 
 import jakarta.transaction.Transactional;
@@ -22,7 +26,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberInfoRepository infoRepository;
-    
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final JwtTokenProvider jwtTokenProvider;
     //회원가입
     @Transactional
     public MemberResponseVO joinMember(MemberJoinVO data) {
@@ -31,16 +36,28 @@ public class MemberService {
         MemberResponseVO response = new MemberResponseVO();
         response.setEmail(data.getEmail());
         response.setNickname(data.getNickname());
+        response.setMessage("회원가입이 완료되었습니다.");
         return response;
+
     }
     //회원 로그인
     public MemberResponseVO loginMember(LoginVO data) {
-        MemberInfoEntity user = infoRepository.findByEmailAndPwd(data.getEmail(), data.getPwd());
-        MemberResponseVO userData = new MemberResponseVO();
-        userData.setEmail(user.getEmail());
-        userData.setNickname(user.getNickname());
-        userData.setMessage("로그인 성공");
-        return userData;
+        MemberInfoEntity member = infoRepository.findByEmailAndPwd(data.getEmail(), data.getPwd()).orElseThrow();
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(member.getEmail(), member.getPwd(), member.getAuthorities());
+        System.out.println(authenticationToken);
+        // 여기서 문제가 발생합니다. 욕하고 싶다.
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+
+        // SecurityContextHolder.getContext().setAuthentication(authentication);
+        System.out.println(authentication);
+        TokenVO tokenVO = jwtTokenProvider.generateToken(authentication);
+
+        MemberResponseVO memberData = new MemberResponseVO();
+        memberData.setEmail(member.getEmail());
+        memberData.setNickname(member.getNickname());
+        memberData.setMessage("로그인 성공");
+        memberData.setToken(tokenVO);
+        return memberData;
     }
     //회원정보 삭제
     public UserResponseVO deleteMember(Long seq){

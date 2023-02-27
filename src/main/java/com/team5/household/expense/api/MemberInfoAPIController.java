@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.team5.household.expense.repository.MemberInfoRepository;
 import com.team5.household.expense.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,28 +32,25 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name="회원등록정보", description="회원정보 CRUD API")
 @RestController
 @RequestMapping("/api/members")
+@RequiredArgsConstructor
 public class MemberInfoAPIController {
     @Autowired
     MemberService mService;
     @Autowired
     MemberInfoRepository mRepo;
     //회원정보 등록
-    @Operation(summary = "회원 정보 등록", description = "")
     @PostMapping("/join")
-    public Map<String, Object> postMemberJoin(@RequestBody MemberJoinVO data){
-        Map<String, Object> resultmap = new LinkedHashMap<>();
+    public ResponseEntity<MemberResponseVO> postMemberJoin(@RequestBody MemberJoinVO data){
         MemberResponseVO response = mService.joinMember(data);
-        resultmap.put("data", response);
-        resultmap.put("status", HttpStatus.CREATED);
-        return resultmap;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    //로그인
+
     @PostMapping("/login")
-    @Operation(summary = "회원 로그인", description = "email,pwd 사용")
     public ResponseEntity<MemberResponseVO> postMemberLogin(@RequestBody LoginVO login) {
-        MemberResponseVO resultMap  = mService.loginMember(login);
-        return new ResponseEntity<>(resultMap, HttpStatus.OK);
+        MemberResponseVO memberData = mService.loginMember(login);
+        return new ResponseEntity<>(memberData, HttpStatus.OK);
     }
+
     //회원정보 전체조회
     @Operation(summary = "회원 리스트 전체조회", description = "회원정보를 모두 조회합니다.")
     @GetMapping("/listall")
@@ -70,12 +68,12 @@ public class MemberInfoAPIController {
     //회원정보 삭제
     @Operation(summary = "회원정보 삭제", description = "url에 seq번호를 이용해서 회원의 내용을 삭제합니다.")
     @DeleteMapping("/delete/{seq}")
-    public ResponseEntity<UserResponseVO> deleteMember( 
+    public ResponseEntity<UserResponseVO> deleteMember(
         @Parameter(description = "seq번호를 입력해서 삭제를 합니다.")
         @PathVariable Long seq){
        UserResponseVO response = mService.deleteMember(seq);
        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    
+
 }
 
