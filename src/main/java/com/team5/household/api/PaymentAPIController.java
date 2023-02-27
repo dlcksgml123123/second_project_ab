@@ -30,21 +30,11 @@ public class PaymentAPIController {
     @Autowired PaymentInfoRepository pRepo;
     //결제 수단 등록
     @Operation(summary = "결제 수단 등록", description ="paymentType / paymentName 사용")
-    @PostMapping("/add")
-    public ResponseEntity<PaymentAddResponseVO> postPaymentAdd(
-        @Parameter(description = "")
-        @RequestBody PaymentAddVO data){
-        PaymentAddResponseVO response = pService.addPayment(data);
-       return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
-    //결제수단 조회
-    @Operation(summary = "결제수단 리스트 조회", description="type별로 검색가능합니다.")
-    @GetMapping("/list/{type}")
-    public ResponseEntity<PaymentResponseVO> getPaymentList(
-        @Parameter(description = "pathvariable로 데이터를 입력합니다.(type:1.카드/2.계좌/3.현금)")    
-        @PathVariable Integer type){
-        PaymentResponseVO map = pService.checkPayment(type);
-        return new ResponseEntity<>(map, HttpStatus.CREATED);
+    @PostMapping("/add/{email}")
+    public ResponseEntity<PaymentAddResponseVO> postPaymentAdd(@Parameter(description = "") @RequestBody PaymentAddVO data, @PathVariable String email){
+        PaymentAddResponseVO response = pService.addPayment(email, data);
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     //결제수단 전체 조회
     @Operation(summary = "결제수단 리스트 전체조회", description = "결제수단을 모두 조회합니다.")

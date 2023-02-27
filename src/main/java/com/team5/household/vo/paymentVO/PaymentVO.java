@@ -12,8 +12,8 @@ public class PaymentVO {
     private String paymentName;
     
 
-    public PaymentVO(PaymentInfoEntity data){
-        this.paymentName = data.getPiName();
-        this.paymentType = data.getPiType();
-    }
+    // public PaymentVO(PaymentInfoEntity data){
+    //     this.paymentName = data.getPiName();
+    //     this.paymentType = data.getPiType();
+    // }
 }
