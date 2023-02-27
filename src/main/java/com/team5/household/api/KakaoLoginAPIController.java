@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +25,8 @@ public class KakaoLoginAPIController {
     private final KakaoAuthService authService;
     //https://kauth.kakao.com/oauth/authorize?client_id=ebe921cbeb961a1f8b1c320902aa8b36&redirect_uri=http://localhost:8585/oauth/kakao&response_type=code
     
-    @GetMapping("/kakao")
-    public ResponseEntity<Map<String, Object>> kakaoCallback(@RequestParam(value = "code") String code) throws Exception { // Data를 리턴해주는 컨트롤러 함수
+    @PostMapping("/kakao/{code}")
+    public ResponseEntity<Map<String, Object>> kakaoCallback(@PathVariable(value = "code") String code) throws Exception { // Data를 리턴해주는 컨트롤러 함수
         Map<String, Object> map = new LinkedHashMap<>();
         OAuthTokenVO authTokenVO = authService.getAuthToken(code);
 

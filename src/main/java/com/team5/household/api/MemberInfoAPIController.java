@@ -40,6 +40,4 @@ public class MemberInfoAPIController {
         return new ResponseEntity<>(memberData, HttpStatus.OK);
     }
 
-    
-    
 }
