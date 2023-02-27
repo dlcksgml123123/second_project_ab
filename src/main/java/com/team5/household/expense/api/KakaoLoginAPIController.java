@@ -19,7 +19,7 @@ import com.team5.household.expense.vo.OAuthTokenVO;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/oauth")
+@RequestMapping("/oauth")
 @RequiredArgsConstructor
 public class KakaoLoginAPIController {
     private final KakaoAuthService authService;
