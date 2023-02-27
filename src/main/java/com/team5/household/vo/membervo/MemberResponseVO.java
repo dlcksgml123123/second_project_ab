@@ -9,6 +9,7 @@ public class MemberResponseVO {
     private String email;
     private String nickname;
     private String message;
+    private String role;
     private TokenVO token;
     
     public void setMemberResponseVO(String email, String nickname){

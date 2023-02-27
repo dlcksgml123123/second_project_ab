@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,13 +28,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name="member_info")
+@DynamicInsert
 public class MemberInfoEntity implements UserDetails{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="mi_seq") private Long miSeq;
     @Column(name="mi_email") private String email;
     @Column(name="mi_pwd") private String pwd;
     @Column(name="mi_nickname") private String nickname;
-    @Column(name="mi_role") private String miRole;
+    @Column(name="mi_role") @ColumnDefault("USER") private String miRole;
 
     @JsonIgnore
     @Override
@@ -47,6 +50,7 @@ public class MemberInfoEntity implements UserDetails{
         this.email = data.getEmail();
         this.pwd = data.getPwd();
         this.nickname = data.getNickname();
+        this.miRole = data.getRole();
     }
 
     @JsonIgnore

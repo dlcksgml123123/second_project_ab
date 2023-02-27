@@ -1,5 +1,9 @@
 package com.team5.household.vo;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,4 +25,7 @@ public class MemberJoinVO {
 
     @NotBlank
     private String nickname;
+
+    @Nullable
+    private String role;
 }

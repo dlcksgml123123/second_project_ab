@@ -32,6 +32,7 @@ public class MemberService {
         MemberResponseVO response = new MemberResponseVO();
         response.setEmail(data.getEmail());
         response.setNickname(data.getNickname());
+        // response.setRole("USER");
         return response;
     }
 
