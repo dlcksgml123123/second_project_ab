@@ -32,8 +32,9 @@ public class MemberService {
         MemberResponseVO response = new MemberResponseVO();
         response.setEmail(data.getEmail());
         response.setNickname(data.getNickname());
-        // response.setRole("USER");
+        response.setMessage("회원가입이 완료되었습니다.");
         return response;
+        
     }
 
     public MemberResponseVO loginMember(LoginVO data) {

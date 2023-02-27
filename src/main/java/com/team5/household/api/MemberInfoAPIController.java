@@ -26,12 +26,9 @@ public class MemberInfoAPIController {
     private final MemberService mService;
     
     @PostMapping("/join")
-    public Map<String, Object> postMemberJoin(@RequestBody MemberJoinVO data){
-        Map<String, Object> resultmap = new LinkedHashMap<>();
+    public ResponseEntity<MemberResponseVO> postMemberJoin(@RequestBody MemberJoinVO data){
         MemberResponseVO response = mService.joinMember(data);
-        resultmap.put("data", response);
-        resultmap.put("status", HttpStatus.CREATED);
-        return resultmap;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
     @PostMapping("/login")
