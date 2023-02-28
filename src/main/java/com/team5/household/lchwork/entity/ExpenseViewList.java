@@ -31,8 +31,10 @@ public class ExpenseViewList {
     @Column(name = "eh_seq") private Long ehSeq;
     @Column(name = "eh_date") private LocalDateTime ehDate;
     @Column(name = "eh_title") private String ehTitle;
+    @Column(name = "eh_content") private String ehContent;
     @Column(name = "eh_price") private Integer ehPrice;
     @Column(name = "eh_location") private String ehLocation;
+    @Column(name = "eh_store_name") private String ehStoreName;
     @Column(name = "eh_img_file") private String ehImgFile;
     @Column(name = "cc_seq") private Long ccSeq;
     @Column(name = "cc_name") private String ccName;
