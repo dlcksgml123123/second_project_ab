@@ -55,6 +55,10 @@ public class LchCultureFixService {
             response.setUpdated(false);
             response.setMessage("잘못된 카테고리 정보입니다.");
         }
+        else if(entityOpt.get().getCcMiSeq() != member) {
+            response.setUpdated(false);
+            response.setMessage("잘못된 회원정보입니다.");
+        }
         else if(entityOpt.get().getCcName().equalsIgnoreCase(name)) {
             response.setUpdated(false);
             response.setMessage("이전과 같은 이름으로 수정할 수 없습니다.");
