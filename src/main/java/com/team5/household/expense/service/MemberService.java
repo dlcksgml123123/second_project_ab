@@ -55,6 +55,7 @@ public class MemberService {
         MemberResponseVO memberData = new MemberResponseVO();
         memberData.setEmail(member.getEmail());
         memberData.setNickname(member.getNickname());
+        memberData.setMemberSeq(member.getMiSeq());
         memberData.setMessage("로그인 성공");
         memberData.setToken(tokenVO);
         return memberData;
