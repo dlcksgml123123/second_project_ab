@@ -31,15 +31,15 @@ public class LchExpenseHistoryController {
     @Autowired LchExpenseHistoryService ehService;
     @Autowired LchExpenseHistoryRepository ehRepo;
 
-    // @GetMapping("/monthly/list")
-    // @PageableAsQueryParam
-    // public ResponseEntity<Object> getMonthlyExpenseHistoryList(@RequestParam @Nullable String dt,
-    // @Parameter(hidden = true)
-    // @PageableDefault(size=20, sort="ehDate", direction = Sort.Direction.ASC) Pageable pageable
-    // ) {
-    //     if(dt == null) dt = "";
-    //     return new ResponseEntity<>(ehService.MonthExpenseHistoryList(dt, pageable), HttpStatus.OK);
-    // }
+    @GetMapping("/monthly/list")
+    @PageableAsQueryParam
+    public ResponseEntity<Object> getMonthlyExpenseHistoryList(@RequestParam @Nullable String dt,
+    @Parameter(hidden = true)
+    @PageableDefault(size=20, sort="ehDate", direction = Sort.Direction.ASC) Pageable pageable
+    ) {
+        if(dt == null) dt = "";
+        return new ResponseEntity<>(ehService.MonthExpenseHistoryList(dt, pageable), HttpStatus.OK);
+    }
     @Operation(summary = "월별 지출내역 리스트", description = "회원의 월별 지출내역 리스트를 출력합니다.")
     @GetMapping(value = "/monthly/list2") 
     @PageableAsQueryParam
