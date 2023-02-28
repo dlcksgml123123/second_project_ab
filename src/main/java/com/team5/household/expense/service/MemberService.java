@@ -39,6 +39,7 @@ public class MemberService {
         MemberResponseVO userData = new MemberResponseVO();
         userData.setEmail(user.getEmail());
         userData.setNickname(user.getNickname());
+        userData.setMemberSeq(user.getMiSeq());
         userData.setMessage("로그인 성공");
         return userData;
     }

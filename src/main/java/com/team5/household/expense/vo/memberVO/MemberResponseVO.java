@@ -6,6 +6,7 @@ import lombok.Data;
 public class MemberResponseVO {
     private String email;
     private String nickname;
+    private Long memberSeq;
     private String message;
     
 }
