@@ -33,6 +33,7 @@ springdoc:
   paths-to-match:
       - /api/**
       - /oauth/kakao/**
+      - /oauth/kakaoauth/**
 
 file:
   image:

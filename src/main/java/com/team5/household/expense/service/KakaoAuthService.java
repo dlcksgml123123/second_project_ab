@@ -1,13 +1,5 @@
 package com.team5.household.expense.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.team5.household.expense.config.KakaoValue;
-import com.team5.household.expense.entity.KaKaoMemberInfoEntity;
-import com.team5.household.expense.repository.KaKaoMemberRepository;
-import com.team5.household.expense.vo.KakaoUserInfoVO;
-import com.team5.household.expense.vo.OAuthTokenVO;
-import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -19,6 +11,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.team5.household.expense.config.KakaoValue;
+import com.team5.household.expense.entity.KaKaoMemberInfoEntity;
+import com.team5.household.expense.repository.KaKaoMemberRepository;
+import com.team5.household.expense.Security.provider.JwtTokenProvider;
+import com.team5.household.expense.Security.VO.TokenVO;
+import com.team5.household.expense.vo.KakaoNewUserInfoVO;
+import com.team5.household.expense.vo.KakaoUserInfoVO;
+import com.team5.household.expense.vo.OAuthTokenVO;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -64,12 +69,13 @@ public class KakaoAuthService {
         return authTokenVO;
     }
 
-    public KakaoUserInfoVO getKakaoUserData(OAuthTokenVO authTokenVO) throws ParseException{
+    public KakaoUserInfoVO getKakaoUserData(String token) throws ParseException{
         RestTemplate rt2 = new RestTemplate();
         
         // HttpHeader 오브젝트 생성
         HttpHeaders headers2 = new HttpHeaders();
-        headers2.add("Authorization", "Bearer "+authTokenVO.getAccess_token());
+        // headers2.add("Authorization", "Bearer "+authTokenVO.getAccess_token());
+        headers2.add("Authorization", "Bearer "+token);
         headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
         
         // HttpHeader와 HttpBody를 하나의 오브젝트에 담기

@@ -23,13 +23,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KakaoLoginAPIController {
     private final KakaoAuthService authService;
-    //https://kauth.kakao.com/oauth/authorize?client_id=ebe921cbeb961a1f8b1c320902aa8b36&redirect_uri=http://localhost:8585/oauth/kakao&response_type=code
-    
-    @GetMapping ("/kakao")
-    public ResponseEntity<Map<String, Object>> kakaoCallback(@RequestParam(value = "code") String code) throws Exception { // Data를 리턴해주는 컨트롤러 함수
-        Map<String, Object> map = new LinkedHashMap<>();
+    // https://kauth.kakao.com/oauth/authorize?client_id=ebe921cbeb961a1f8b1c320902aa8b36&redirect_uri=http://localhost:8585/oauth/kakao&response_type=code
+    @GetMapping("/kakao")
+    public String getKakaoCode(@RequestParam(value = "code") String code) {
+        // 리디렉션에 의해서 토큰 내어줌
         OAuthTokenVO authTokenVO = authService.getAuthToken(code);
+        return authTokenVO.getAccess_token();
+    }
 
+    @GetMapping("/kakaoauth")
+    public ResponseEntity<Map<String, Object>> kakaoCallback(@RequestParam(value = "token") String token) throws Exception{
+        // 프론트에서 받은 코드로 재차 요청
+        Map<String, Object> map = new LinkedHashMap<>();
+    // public ResponseEntity<Map<String, Object>> kakaoCallback(@RequestParam(value = "code") String code) throws Exception { // Data를 리턴해주는 컨트롤러 함수
+    //     Map<String, Object> map = new LinkedHashMap<>();
+    //     OAuthTokenVO authTokenVO = authService.getAuthToken(code);
+    //     System.out.println(authTokenVO);
+        
         /*
          * RestTemplate rt = new RestTemplate();
          * // HttpHeader 오브젝트 생성
@@ -84,7 +94,8 @@ public class KakaoLoginAPIController {
         System.out.println(nickname);
         System.out.println(email);
          */
-        KakaoUserInfoVO infoVO = authService.getKakaoUserData(authTokenVO);
+        KakaoUserInfoVO infoVO = authService.getKakaoUserData(token);
+        // 카카오 사용자 정보 나옴
         map.put("userData", infoVO);
 
         return new ResponseEntity<>(map, HttpStatus.OK);
