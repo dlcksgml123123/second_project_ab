@@ -83,4 +83,18 @@ public class PaymenrService {
         }
         return response;
     }
+    public PaymentResponseVO checkPayment(Integer type){
+        PaymentResponseVO response  = new PaymentResponseVO();
+        List<PaymentInfoEntity> payList = pRepo.findByPiType(type);
+     //    System.out.println(payList.toString());
+        if(payList.size() != 0){
+         response.setStatus(true);
+         response.setMessage("카테고리 조회 성공");
+         response.setPayment(payList);
+        }else{
+            response.setStatus(false);
+            response.setMessage("조회할 카테고리가 없습니다.");
+        }
+        return response;
+     }
 }

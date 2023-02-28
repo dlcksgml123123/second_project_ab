@@ -32,7 +32,7 @@ public class PaymentAPIController {
     @Autowired
     PaymentInfoRepository pRepo;
     //결제 수단 등록
-    @Operation(summary = "결제 수단 등록", description ="paymentType / paymentName 사용")
+    @Operation(summary = "결제 수단 등록", description ="email로 결제수단을 등록합니다.")
     @PostMapping("/add/{email}")
     public ResponseEntity<PaymentAddResponseVO> postPaymentAdd(@Parameter(description = "") 
     @RequestBody PaymentAddVO data, @PathVariable String email){
@@ -46,6 +46,14 @@ public class PaymentAPIController {
     public ResponseEntity<PaymentListVO> getPaymentListAll(){
         PaymentListVO payList = pService.listall();
         return new ResponseEntity<>(payList, HttpStatus.CREATED);
+    }
+    @Operation(summary = "결제수단 타입별로 검색", description = "결제수단을 타입별로 검색합니다.(type:1.카드/2.계좌/3.현금)")
+    @GetMapping("/list/{type}")
+    public ResponseEntity<PaymentResponseVO> getPaymentList(
+        @Parameter(description = "pathvariable로 데이터를 입력합니다.(type:1.카드/2.계좌/3.현금)")
+        @PathVariable Integer type){
+        PaymentResponseVO map = pService.checkPayment(type);
+        return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
     //결제수단 삭제
     @Operation(summary = "결제 수단 삭제", description = "URL에 seq번호를 입력하여 데이터베이스 삭제합니다.")
