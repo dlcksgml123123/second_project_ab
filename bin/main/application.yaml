@@ -32,5 +32,6 @@ springdoc:
       doc-expansion: none
   paths-to-match:
       - /api/**
+      - /oauth/kakao
 jwt:
   secretKey: sdkljghsduigbhweiolhgsdnksldngoisdjfldajftiokhjsdfsdfewrstyewr

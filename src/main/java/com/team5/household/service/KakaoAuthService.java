@@ -69,12 +69,13 @@ public class KakaoAuthService {
         return authTokenVO;
     }
 
-    public KakaoUserInfoVO getKakaoUserData(OAuthTokenVO authTokenVO) throws ParseException{
+    public KakaoUserInfoVO getKakaoUserData(String token) throws ParseException{
         RestTemplate rt2 = new RestTemplate();
         
         // HttpHeader 오브젝트 생성
         HttpHeaders headers2 = new HttpHeaders();
-        headers2.add("Authorization", "Bearer "+authTokenVO.getAccess_token());
+        // headers2.add("Authorization", "Bearer "+authTokenVO.getAccess_token());
+        headers2.add("Authorization", "Bearer "+token);
         headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
         
         // HttpHeader와 HttpBody를 하나의 오브젝트에 담기
