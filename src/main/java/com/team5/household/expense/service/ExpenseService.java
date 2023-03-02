@@ -76,7 +76,7 @@ public class ExpenseService {
         int width = 512;
         int height = 512;
         Image newImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        // 줄인 이미지를 BufferedImage 객체로 변환한    다.
+        // 줄인 이미지를 BufferedImage 객체로 변환한다.
         BufferedImage outputImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = outputImage.createGraphics();
         graphics.drawImage(newImage, 0, 0, null);
