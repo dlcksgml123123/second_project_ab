@@ -35,10 +35,9 @@ public class MemberService {
         }
         MemberInfoEntity newMember = new MemberInfoEntity(data);
         infoRepository.save(newMember);
-        MemberInfoEntity member = infoRepository.findByEmailAndPwd(data.getEmail(), data.getPwd()).orElseThrow();
         MemberResponseVO response = new MemberResponseVO();
-        response.setEmail(member.getEmail());
-        response.setNickname(member.getNickname());
+        response.setEmail(newMember.getEmail());
+        response.setNickname(newMember.getNickname());
         response.setMessage("회원가입이 완료되었습니다.");
         return response;
         
