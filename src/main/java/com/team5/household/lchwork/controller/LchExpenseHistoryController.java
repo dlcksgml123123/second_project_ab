@@ -45,7 +45,7 @@ public class LchExpenseHistoryController {
     @PageableAsQueryParam
     public ResponseEntity<Object> getMonthlyExpenseHistoryList2(@RequestParam @Nullable Long member, String dt,
     @Parameter(description = "params로 데이터를 입력합니다.(member:회원번호, dt:날짜(년월))" ,hidden = true)
-    @PageableDefault(size=20, sort="ehDate", direction = Sort.Direction.ASC) Pageable pageable
+    @PageableDefault(size=20, sort="ehDate", direction = Sort.Direction.DESC) Pageable pageable
     ) {
         if(dt == null) dt = "";
         return new ResponseEntity<>(ehService.MonthlyExpenseHistoryList(member, dt, pageable), HttpStatus.OK);
