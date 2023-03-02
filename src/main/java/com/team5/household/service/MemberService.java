@@ -40,7 +40,6 @@ public class MemberService {
         response.setNickname(newMember.getNickname());
         response.setMessage("회원가입이 완료되었습니다.");
         return response;
-        
     }
 
     public MemberResponseVO loginMember(LoginVO data) {
@@ -53,6 +52,7 @@ public class MemberService {
         memberData.setEmail(member.getEmail());
         memberData.setNickname(member.getNickname());
         memberData.setRole(member.getMiRole());
+        memberData.setSeq(member.getMiSeq());
         memberData.setMessage("로그인 성공");
         memberData.setToken(tokenVO);
         return memberData;
