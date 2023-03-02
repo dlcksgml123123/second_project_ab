@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name="kakaomember_info")
-public class KakaoMemberInfoEntity implements UserDetails {
+public class KaKaoMemberInfoEntity implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="kmi_seq") private Long kmiSeq;
     @Column(name="kmi_email") private String email;
@@ -34,7 +34,7 @@ public class KakaoMemberInfoEntity implements UserDetails {
     @Column(name="kmi_role") private String role;
 
     @Builder
-    public KakaoMemberInfoEntity(KakaoUserInfoVO data){
+    public KaKaoMemberInfoEntity(KakaoUserInfoVO data){
         this.email = data.getEmail();
         this.nickname = data.getNickname();
     }

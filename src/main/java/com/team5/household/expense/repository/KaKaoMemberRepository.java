@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.team5.household.expense.entity.KakaoMemberInfoEntity;
+import com.team5.household.expense.entity.KaKaoMemberInfoEntity;
 
-public interface KakaoMemberRepository extends JpaRepository<KakaoMemberInfoEntity, Long>{
+public interface KaKaoMemberRepository extends JpaRepository<KaKaoMemberInfoEntity, Long>{
     public Integer countByEmail(String email);
-    Optional<KakaoMemberInfoEntity> findByEmail(String email);
+    Optional<KaKaoMemberInfoEntity> findByEmail(String email);
 }

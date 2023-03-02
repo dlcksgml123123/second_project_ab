@@ -1,8 +1,9 @@
 package com.team5.household.expense.service;
 
-import com.team5.household.expense.entity.KakaoMemberInfoEntity;
+import com.team5.household.expense.entity.KaKaoMemberInfoEntity;
 import com.team5.household.expense.entity.MemberInfoEntity;
-import com.team5.household.expense.repository.KakaoMemberRepository;
+import com.team5.household.expense.repository.KaKaoMemberRepository;
+import com.team5.household.expense.repository.KaKaoMemberRepository;
 import com.team5.household.expense.repository.MemberInfoRepository;
 import com.team5.household.expense.Security.provider.JwtTokenProvider;
 import com.team5.household.expense.Security.VO.TokenVO;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class Token {
     private final MemberInfoRepository memberInfoRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    private final KakaoMemberRepository kakaoMemberRepository;
+    private final KaKaoMemberRepository kakaoMemberRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
@@ -34,7 +35,7 @@ public class Token {
 
     @Transactional
     public TokenVO getKakaoToken(String email) {
-        KakaoMemberInfoEntity kakaoEntity = kakaoMemberRepository.findByEmail(email).orElseThrow();
+        KaKaoMemberInfoEntity kakaoEntity = kakaoMemberRepository.findByEmail(email).orElseThrow();
         
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(kakaoEntity.getKmiSeq(), kakaoEntity.getEmail());
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
