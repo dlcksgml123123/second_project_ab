@@ -15,11 +15,8 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.household.expense.config.KakaoValue;
-import com.team5.household.expense.entity.KaKaoMemberInfoEntity;
-import com.team5.household.expense.repository.KaKaoMemberRepository;
-import com.team5.household.expense.Security.provider.JwtTokenProvider;
-import com.team5.household.expense.Security.VO.TokenVO;
-import com.team5.household.expense.vo.KakaoNewUserInfoVO;
+import com.team5.household.expense.entity.KakaoMemberInfoEntity;
+import com.team5.household.expense.repository.KakaoMemberRepository;
 import com.team5.household.expense.vo.KakaoUserInfoVO;
 import com.team5.household.expense.vo.OAuthTokenVO;
 
@@ -28,8 +25,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class KakaoAuthService {
-    private final KaKaoMemberRepository kakaoMemberRepository;
-    private final Token token;
+    private final KakaoMemberRepository kakaoMemberRepository;
     
     public Boolean isDuplicatedEmail(String email){
         if(kakaoMemberRepository.countByEmail(email) > 0) {
@@ -98,7 +94,7 @@ public class KakaoAuthService {
         }
         else{
             KakaoUserInfoVO infoVO = new KakaoUserInfoVO(email, nickname);
-            KaKaoMemberInfoEntity kakaoUser = new KaKaoMemberInfoEntity(infoVO);
+            KakaoMemberInfoEntity kakaoUser = new KakaoMemberInfoEntity(infoVO);
             kakaoMemberRepository.save(kakaoUser);
             KakaoUserInfoVO userData = new KakaoUserInfoVO(email, nickname);
             return userData;

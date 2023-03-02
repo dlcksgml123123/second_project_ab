@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,16 +29,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name="member_info")
+@DynamicInsert
 public class MemberInfoEntity implements UserDetails{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="mi_seq") private Long miSeq;
     @Column(name="mi_email") private String email;
     @Column(name="mi_pwd") private String pwd;
     @Column(name="mi_nickname") private String nickname;
-    @Column(name="mi_name") private String name;
-    @Column(name="mi_birth") private LocalDate birth;
-    @Column(name="mi_gen") private Integer gen;
-    @Column(name="mi_job") private String job;
     @Column(name="mi_role") @ColumnDefault("USER") private String miRole;
 
     @JsonIgnore
@@ -54,15 +52,6 @@ public class MemberInfoEntity implements UserDetails{
         this.pwd = data.getPwd();
         this.nickname = data.getNickname();
         this.miRole = data.getRole();
-    }
-    
-    public void setMemberInfo(MemberUpdateVO data){
-        this.name = data.getName();
-        this.nickname = data.getNickname();
-        this.birth = data.getBirth();
-        this.gen = data.getGen();
-        this.job = data.getJob();
-        this.miRole = data.getMiRole();
     }
 
     @JsonIgnore

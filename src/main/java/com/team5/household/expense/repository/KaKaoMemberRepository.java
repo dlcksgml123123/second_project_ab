@@ -1,12 +1,12 @@
 package com.team5.household.expense.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.team5.household.expense.entity.KaKaoMemberInfoEntity;
-
 import java.util.Optional;
 
-public interface KaKaoMemberRepository extends JpaRepository<KaKaoMemberInfoEntity, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.team5.household.expense.entity.KakaoMemberInfoEntity;
+
+public interface KakaoMemberRepository extends JpaRepository<KakaoMemberInfoEntity, Long>{
     public Integer countByEmail(String email);
-    Optional<KaKaoMemberInfoEntity> findByEmail(String email);
+    Optional<KakaoMemberInfoEntity> findByEmail(String email);
 }

@@ -32,7 +32,7 @@ springdoc:
       doc-expansion: none
   paths-to-match:
       - /api/**
-      - /oauth/kakao/**
+      - /oauth/kakao
       - /oauth/kakaoauth/**
 
 file:
