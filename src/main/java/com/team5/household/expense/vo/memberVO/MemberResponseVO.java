@@ -8,11 +8,11 @@ import lombok.Data;
 public class MemberResponseVO {
     private String email;
     private String nickname;
-    private Long memberSeq;
     private String message;
     private String role;
+    private Long seq;
     private TokenVO token;
-
+    
     public void setMemberResponseVO(String email, String nickname){
         this.email = email;
         this.nickname = nickname;
