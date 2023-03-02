@@ -3,12 +3,10 @@ package com.team5.household.service;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.team5.household.entity.MemberInfoEntity;
 import com.team5.household.repository.MemberInfoRepository;
-import com.team5.household.security.filter.JwtAuthenticationFilter;
 import com.team5.household.security.provider.JwtTokenProvider;
 import com.team5.household.security.vo.TokenVO;
 import com.team5.household.vo.LoginVO;

@@ -17,9 +17,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.household.config.KakaoValue;
 import com.team5.household.entity.KakaoMemberInfoEntity;
 import com.team5.household.repository.KakaoMemberRepository;
-import com.team5.household.security.provider.JwtTokenProvider;
-import com.team5.household.security.vo.TokenVO;
-import com.team5.household.vo.KakaoNewUserInfoVO;
 import com.team5.household.vo.KakaoUserInfoVO;
 import com.team5.household.vo.OAuthTokenVO;
 
@@ -29,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KakaoAuthService {
     private final KakaoMemberRepository kakaoMemberRepository;
-    private final Token token;
     
     public Boolean isDuplicatedEmail(String email){
         if(kakaoMemberRepository.countByEmail(email) > 0) {
