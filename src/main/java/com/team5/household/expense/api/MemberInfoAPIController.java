@@ -20,17 +20,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberInfoAPIController {
     private final MemberService mService;
-    
+
     @PostMapping("/join")
     public ResponseEntity<MemberResponseVO> postMemberJoin(@RequestBody MemberJoinVO data) throws Exception{
         MemberResponseVO response = mService.joinMember(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    
+
     @PostMapping("/login")
     public ResponseEntity<MemberResponseVO> postMemberLogin(@RequestBody LoginVO login) {
         MemberResponseVO memberData = mService.loginMember(login);
         return new ResponseEntity<>(memberData, HttpStatus.OK);
     }
-
 }
