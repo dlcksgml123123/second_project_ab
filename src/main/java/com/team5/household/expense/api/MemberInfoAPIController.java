@@ -22,7 +22,7 @@ public class MemberInfoAPIController {
     private final MemberService mService;
     
     @PostMapping("/join")
-    public ResponseEntity<MemberResponseVO> postMemberJoin(@RequestBody MemberJoinVO data){
+    public ResponseEntity<MemberResponseVO> postMemberJoin(@RequestBody MemberJoinVO data) throws Exception{
         MemberResponseVO response = mService.joinMember(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

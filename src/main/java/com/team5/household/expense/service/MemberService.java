@@ -23,13 +23,28 @@ public class MemberService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
 
+    public Boolean isDuplicatedEmail(String email){
+        if(infoRepository.countByEmail(email) > 0) {
+            return true;
+        }
+        return false;
+    }
+
     @Transactional
-    public MemberResponseVO joinMember(MemberJoinVO data) {
+    public MemberResponseVO joinMember(MemberJoinVO data) throws Exception {
+        if(isDuplicatedEmail(data.getEmail())){
+            throw new Exception("중복된 이메일");
+        }
         MemberInfoEntity newMember = new MemberInfoEntity(data);
         infoRepository.save(newMember);
+        MemberInfoEntity member = infoRepository.findByEmailAndPwd(data.getEmail(), data.getPwd()).orElseThrow();
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(member.getEmail(), member.getPwd(), member.getAuthorities());
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        TokenVO tokenVO = jwtTokenProvider.generateToken(authentication);
         MemberResponseVO response = new MemberResponseVO();
         response.setEmail(data.getEmail());
         response.setNickname(data.getNickname());
+        response.setToken(tokenVO);
         response.setMessage("회원가입이 완료되었습니다.");
         return response;
 
@@ -38,10 +53,7 @@ public class MemberService {
     public MemberResponseVO loginMember(LoginVO data) {
         MemberInfoEntity member = infoRepository.findByEmailAndPwd(data.getEmail(), data.getPwd()).orElseThrow();
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(member.getEmail(), member.getPwd(), member.getAuthorities());
-
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-
-        System.out.println(authentication);
         TokenVO tokenVO = jwtTokenProvider.generateToken(authentication);
 
         MemberResponseVO memberData = new MemberResponseVO();
