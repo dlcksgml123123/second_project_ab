@@ -17,13 +17,6 @@ spring:
       max-file-size: 100MB
       max-request-size: 110MB
 
-<<<<<<< HEAD
-=======
-#Jwt Token
-jwt:
-  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
-
->>>>>>> d58e4d18cb5b24ec2de732848c395c8b7ab87d1e
 # Swagger Settings
 springdoc:
   default-consumes-media-type: application/json
@@ -39,3 +32,12 @@ springdoc:
       doc-expansion: none
   paths-to-match:
       - /api/**
+      - /oauth/kakao
+      - /oauth/kakaoauth/**
+
+file:
+  image:
+    expense: /home/expense/image/history
+
+jwt:
+  secretKey: sdkljghsduigbhweiolhgsdnksldngoisdjfldajftiokhjsdfsdfewrstyewr
