@@ -33,5 +33,6 @@ springdoc:
   paths-to-match:
       - /api/**
       - /oauth/kakao
+      - /oauth/kakaoauth/**
 jwt:
   secretKey: sdkljghsduigbhweiolhgsdnksldngoisdjfldajftiokhjsdfsdfewrstyewr

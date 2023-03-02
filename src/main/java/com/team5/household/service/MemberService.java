@@ -40,17 +40,16 @@ public class MemberService {
     public MemberResponseVO loginMember(LoginVO data) {
         MemberInfoEntity member = infoRepository.findByEmailAndPwd(data.getEmail(), data.getPwd()).orElseThrow();
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(member.getEmail(), member.getPwd(), member.getAuthorities());
-        System.out.println(authenticationToken);
-        // 여기서 문제가 발생합니다. 욕하고 싶다.
+        
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         
-        // SecurityContextHolder.getContext().setAuthentication(authentication);
         System.out.println(authentication);
         TokenVO tokenVO = jwtTokenProvider.generateToken(authentication);
         
         MemberResponseVO memberData = new MemberResponseVO();
         memberData.setEmail(member.getEmail());
         memberData.setNickname(member.getNickname());
+        memberData.setRole(member.getMiRole());
         memberData.setMessage("로그인 성공");
         memberData.setToken(tokenVO);
         return memberData;
