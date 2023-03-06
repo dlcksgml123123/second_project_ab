@@ -3,6 +3,7 @@ package com.team5.household.expense.service;
 import com.team5.household.expense.entity.KaKaoMemberInfoEntity;
 import com.team5.household.expense.entity.MemberInfoEntity;
 import com.team5.household.expense.repository.KaKaoMemberRepository;
+import com.team5.household.expense.repository.KaKaoMemberRepository;
 import com.team5.household.expense.repository.MemberInfoRepository;
 import com.team5.household.expense.Security.provider.JwtTokenProvider;
 import com.team5.household.expense.Security.VO.TokenVO;
